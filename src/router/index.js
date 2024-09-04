@@ -12,9 +12,9 @@ const routes = [
     component: () => import('@/views/AboutView.vue')
   },
   {
-    path: '/cars',
-    name: 'cars',
-    component: () => import('@/views/CarsView.vue')
+    path: '/products',
+    name: 'products',
+    component: () => import('@/views/ProductsView.vue')
   },
   // {
   //   path: '/product/:id',
@@ -36,11 +36,11 @@ const routes = [
     name: 'contactUs',
     component: () => import('@/views/ContactUs.vue')
   },
-  // {
-  //   path: '/login',
-  //   name: 'login',
-  //   component: () => import('@/views/LoginView.vue')
-  // },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/LoginView.vue')
+  },
   // {
   //   path: '/logout',
   //   name: 'logout',
