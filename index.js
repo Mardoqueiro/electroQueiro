@@ -1,5 +1,5 @@
 import { userRouter, express } from './controller/UserController.js'
-import { carRouter } from './controller/CarController.js'
+import { productRouter } from './controller/ProductController.js'
 import { orderRouter } from './controller/OrderController.js'
 import cors from 'cors'
 import path from 'path'
@@ -19,7 +19,7 @@ app.use((req, res, next) => {
     next()
 })
 app.use('/user', userRouter)
-app.use('/car', carRouter)
+app.use('/product', productRouter)
 app.use('/order', orderRouter)
 app.use(
     express.static('./static'),
