@@ -26,7 +26,7 @@
                 <img :src="car.imageUrl" loading="lazy" class="img-fluid" :alt="car.carName">
               </template>
               <template #cardBody>
-                <h5 class="card-title fw-bold">{{ car.carName }}</h5>
+                <h5 class="card-title fw-bold">{{ product.carName }}</h5>
                 <p class="lead">{{ car.prodDescription }}</p>
                 <p class="lead"><span class="text-success fw-bold">Price</span>: R{{ car.price }}</p>
               </template>
@@ -462,14 +462,6 @@
           <div class="logos__content">
             <img
               src="https://raw.githubusercontent.com/bedimcode/responsive-car-website/main/assets/img/logo1.png"
-              alt=""
-              class="logos__img"
-            />
-          </div>
-
-          <div class="logos__content">
-            <img
-              src="https://raw.githubusercontent.com/bedimcode/responsive-car-website/main/assets/img/logo2.png"
               alt=""
               class="logos__img"
             />

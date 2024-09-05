@@ -24,13 +24,13 @@
               <a href="/about" class="footer__link">About</a>
             </li>
             <li>
-              <a href="/cars" class="footer__link">Cars</a>
+              <a href="/products" class="footer__link">Cars</a>
             </li>
             <li>
               <a href="#" class="footer__link">History</a>
             </li>
             <li>
-              <a href="/carts" class="footer__link">Shop</a>
+              <a href="/checkout" class="footer__link">Shop</a>
             </li>
           </ul>
         </div>
