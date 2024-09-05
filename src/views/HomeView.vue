@@ -311,7 +311,7 @@
             <li>
               <button class="featured__item" data-filter=".BMW">
                 <img
-                  src="c:\Users\Student\Pictures\EQ Cars\bmw-logo-black-and-white-11549751718var1ggqltn.png"
+                  src="https://raw.githubusercontent.com/bedimcode/responsive-car-website/main/assets/img/logo5.png"
                   alt=""
                 />
               </button>

@@ -171,7 +171,7 @@ export default createStore({
     // ==== Product =====
     async fetchProducts(context) {
       try {
-        const { results } = await (await axios.get(`${apiURL}products`)).data;
+        const { results } = await (await axios.get(`${apiURL}product`)).data;
         if (results) {
           context.commit('setProducts', results);
         } else {
@@ -186,7 +186,7 @@ export default createStore({
     },
     async recentProducts(context) {
       try {
-        const { results, msg } = await (await axios.get(`${apiURL}products/recent`)).data;
+        const { results, msg } = await (await axios.get(`${apiURL}product/recent`)).data;
         if (results) {
           context.commit('setRecentProducts', results);
         } else {
@@ -204,7 +204,7 @@ export default createStore({
     },
     async fetchProduct(context, id) {
       try {
-        const { result, msg } = await (await axios.get(`${apiURL}products/${id}`)).data;
+        const { result, msg } = await (await axios.get(`${apiURL}product/${id}`)).data;
         if (result) {
           context.commit('setProduct', result);
         } else {
