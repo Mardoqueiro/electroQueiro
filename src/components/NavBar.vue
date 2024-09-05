@@ -41,23 +41,37 @@
           <div class="nav__menu" id="nav-menu">
             <ul class="nav__list">
               <li class="nav__item">
-                <a href="/" class="nav__link active-link">Home</a>
+                <router-link to="/" class="nav__link active-link"><span>Home</span></router-link>
               </li>
               <li class="nav__item">
-                <a href="/about" class="nav__link">About</a>
+                <a href="/about" class="nav__link"><span>About</span></a>
               </li>
               <li class="nav__item">
-                <a href="/products" class="nav__link">Cars</a>
+                <a href="/products" class="nav__link"><span>Cars</span></a>
               </li>
               <li class="nav__item">
-                <a href="/checkout" class="nav__link">Cart</a>
+                <a href="/checkout" class="nav__link"><span>Cart</span></a>
               </li>
               <li class="nav__item">
-                <a href="/contactus" class="nav__link">Contact Us</a>
+                <a href="/admin" class="nav__link"><span>Admin</span></a>
               </li>
               <li class="nav__item">
-                <a href="/admin" class="nav__link">Admin</a>
+                <a href="/contactus" class="nav__link"><span>Contact Us</span></a>
               </li>
+              <li class="nav__item">
+                <a href="/signup" class="nav__link"><span>Us</span></a>
+              </li>
+              <ul class="userAccount navbar-nav">
+            <li class="nav-item">
+              <router-link class="nav-link" to="/login">Login</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/logout">Logout</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/signup">Register</router-link>
+            </li>
+          </ul>
             </ul>
   
             <div class="nav__close" id="nav-close">
@@ -73,3 +87,41 @@
       </header>
   
   </template>
+
+  <style scoped>
+  span {
+  position: relative;
+}
+
+span::before, span::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: rgb(65, 120, 220);
+  transform: scaleX(0);
+  transition: transform 0.5s ease;
+}
+
+span::before {
+  top: 0;
+  transform-origin: center right;
+}
+
+span:hover::before {
+  transform-origin: center left;
+  transform: scaleX(1);
+}
+
+span::after {
+  bottom: 0;
+  transform-origin: center left;
+}
+
+span:hover::after {
+  transform-origin: center right;
+  transform: scaleX(1);
+}
+
+  </style>
