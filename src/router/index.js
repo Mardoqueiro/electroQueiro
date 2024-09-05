@@ -1,57 +1,48 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import HomeView from '../views/HomeView.vue'
+import ProductsView from '../views/ProductsView.vue'
+import CheckoutView from '../views/CheckoutView.vue'
+import AdminView from '../views/AdminView.vue'
+import AboutView from '../views/AboutView.vue'
+import SignUp from '../views/SignUp.vue'
+import ContactUs from '@/views/ContactUs.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: () => import('@/views/HomeView.vue')
-  },
-  {
-    path: '/about',
-    name: 'about',
-    component: () => import('@/views/AboutView.vue')
+    component: HomeView
   },
   {
     path: '/products',
     name: 'products',
-    component: () => import('@/views/ProductsView.vue')
+    component: ProductsView
   },
-  // {
-  //   path: '/product/:id',
-  //   name: 'product',
-  //   component: () => import('@/views/ProductDetails.vue')
-  // },
   {
     path: '/checkout',
     name: 'checkout',
-    component: () => import('@/views/CheckoutView.vue')
+    component: CheckoutView
   },
   {
     path: '/admin',
     name: 'admin',
-    component: () => import('@/views/AdminView.vue')
+    component: AdminView
   },
   {
-    path: '/contactUs',
-    name: 'contactUs',
-    component: () => import('@/views/ContactUs.vue')
+    path: '/about',
+    name: 'about',
+    component: AboutView
   },
   {
-    path: '/login',
-    name: 'login',
-    component: () => import('@/views/LoginView.vue')
+    path: '/contact',
+    name: 'contact',
+    component: ContactUs
   },
-  // {
-  //   path: '/logout',
-  //   name: 'logout',
-  //   component: () => import('@/views/LoginView.vue')
-  // },
   {
     path: '/signup',
     name: 'signup',
-    component: () => import('@/views/SignUp.vue')
+    component: SignUp 
   }
-
 ]
 
 const router = createRouter({
