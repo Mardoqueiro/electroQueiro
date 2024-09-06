@@ -50,11 +50,15 @@
 <script setup>
 import NavBar from '@/components/NavBar.vue'
 import { useStore } from 'vuex'
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 
 const store = useStore()
 const cart = computed(() => store.state.cart)
 const cartTotal = computed(() => store.getters.cartTotal)
+
+onMounted(async () => {
+    await store.dispatch('fetchCart')
+})
 
 const updateQuantity = (productId, quantity) => {
     store.dispatch('updateCartItemQuantity', { productId, quantity })

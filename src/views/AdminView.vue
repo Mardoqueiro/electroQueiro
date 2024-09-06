@@ -1,17 +1,17 @@
 <template>
   <div class="container-main">
     <h2>Products Table</h2>
-    <input type="text" placeholder="search"/>
-      <br/>
-      <label for="button">Filter by Catergory</label>
-      <button type="radio">FootWear</button>
-      <br/>
-      <button type="radio">Gear</button>
-      <br/>
-      <button type="radio">Accessories</button>
-      <br/>
-      <button type="radio">Safety</button>
-      <br/>
+    <input type="text" placeholder="search" />
+    <br />
+    <label for="button">Filter by Catergory</label>
+    <button type="radio">Brand</button>
+    <br />
+    <button type="radio">batteryCapacity</button>
+    <br />
+    <button type="radio">Accessories</button>
+    <br />
+    <button type="radio"></button>
+    <br />
 
     <div class="table-container">
       <div class="newProduct">
@@ -132,9 +132,14 @@
           <tr v-for="product in products" :key="product.prodID">
             <td>{{ product.prodID }}</td>
             <td>{{ product.prodName }}</td>
-            <td>{{ product.category }}</td>
-            <td>{{ product.quantity }}</td>
-            <td>{{ product.price }}</td>
+            <td>{{ product.prodBrand }}</td>
+            <td>{{ product.prodYear }}</td>
+            <td>{{ product.batteryCapacity }}</td>
+            <td>{{ product.rangeKM }}</td>
+            <td>{{ product.chargingTime }}</td>
+            <td>{{ product.amount }}</td>
+            <td>{{ product.stockQuantity }}</td>
+            <td>{{ product.imageURL }}</td>
             <td>
               <!-- Button trigger modal -->
               <button
@@ -531,115 +536,157 @@
 </template>
 
 <script setup>
-import Spinner from '@/components/Spinner.vue'
-import { ref, computed, onMounted } from 'vue'
-import { useStore } from 'vuex'
+import Spinner from "@/components/Spinner.vue";
+import { ref, onMounted } from "vue";
+import { useStore } from "vuex";
 
-const store = useStore()
+const store = useStore();
 
 const payload = ref({
   prodName: "",
-  category: "",
-  quantity: 0,
+  prodBrand: "",
+  prodModel: "",
+  prodYear: "",
+  batteryCapacity: "",
+  rangeKM: "",
+  chargingTime: "",
   amount: 0,
-  prodUrl: "",
-})
+  imageURL: "",
+  category: "",
+  stockQuantity: 0,
+});
 
 const userPayload = ref({
   firstName: "",
   lastName: "",
-  userAge: 0,
   Gender: "",
   userRole: "",
   emailAdd: "",
   userProfile: "",
-  userPass: ""
-})
+  userPass: "",
+});
 
-const products = computed(() => store.state.products)
-const users = computed(() => store.state.users)
+// Initialize products and users as empty arrays
+const products = ref([]);
+const users = ref([]);
 
 onMounted(() => {
-  store.dispatch("fetchProducts")
-  store.dispatch("fetchUsers")
-})
+  store.dispatch("fetchProducts").then(() => {
+    products.value = store.state.products;
+  });
+  store.dispatch("fetchUsers").then(() => {
+    users.value = store.state.users;
+  });
+});
 
 // Define your methods here
-const addProduct = () => {
-  console.log("added")
-  store.dispatch('addAProduct', payload.value)
-    .then(() => {
-      console.log('Product added to store!')
-    })
-}
+const addProduct = async () => {
+  console.log("adding product:", payload.value);
+  try {
+    await store.dispatch("addAProduct", payload.value);
+    console.log("Product added to store!");
+    // Reset the form
+    payload.value = {
+      prodName: "",
+      prodBrand: "",
+      prodModel: "",
+      prodYear: "",
+      batteryCapacity: "",
+      rangeKM: "",
+      chargingTime: "",
+      amount: 0,
+      imageURL: "",
+      category: "",
+      stockQuantity: 0,
+    };
+    // Optionally, you can refresh the products list
+    store.dispatch("fetchProducts");
+  } catch (error) {
+    console.error("Error adding product:", error);
+    // Optionally, you can show an error message to the user here
+  }
+};
 
 const updateProduct = (id) => {
   const productPayload = {
     prodID: JSON.parse(id),
-    ...payload.value
-  }
-  store.dispatch("updateProduct", productPayload)
-    .then(() => {
-      console.log('Product updated in store!')
-      location.reload()
-    })
-}
+    ...payload.value,
+  };
+  store.dispatch("updateProduct", productPayload).then(() => {
+    console.log("Product updated in store!");
+    location.reload();
+  });
+};
 
 const deleteProduct = (prodID) => {
-  store.dispatch('deleteProduct', prodID)
-    .then(() => {
-      console.log('Product deleted from store!')
-    })
-}
+  store.dispatch("deleteProduct", prodID).then(() => {
+    console.log("Product deleted from store!");
+  });
+};
 
 const addUser = () => {
-  store.dispatch('addUser', userPayload.value)
-    .then(() => {
-      console.log('User added to store!')
-    })
-    .catch((error) => {
-      console.error('Error adding user', error)
-    })
-}
+  const result = store.dispatch("addUser", userPayload.value);
+  if (result && typeof result.then === 'function') {
+    result.then(() => {
+      console.log("User added to store!");
+      // Optionally refresh the users list
+      store.dispatch("fetchUsers");
+      // Reset the form
+      userPayload.value = {
+        firstName: "",
+        lastName: "",
+        Gender: "",
+        userRole: "",
+        emailAdd: "",
+        userProfile: "",
+        userPass: "",
+      };
+    }).catch((error) => {
+      console.error("Error adding user", error);
+    });
+  } else {
+    console.log("User addition dispatched, but no promise returned");
+    // Optionally refresh the users list
+    store.dispatch("fetchUsers");
+  }
+};
 
 const updateUser = (id) => {
   const userPayload = {
     userID: JSON.parse(id),
-    ...userPayload.value
-  }
-  store.dispatch("updateUser", userPayload)
-    .then(() => {
-      console.log('User updated')
-      location.reload()
-    })
-}
+    ...userPayload.value,
+  };
+  store.dispatch("updateUser", userPayload).then(() => {
+    console.log("User updated");
+    location.reload();
+  });
+};
 
 const deleteUser = (userID) => {
-  store.dispatch('deleteUser', userID)
-    .then(() => {
-      console.log('User deleted from store!')
-    })
-}
+  store.dispatch("deleteUser", userID).then(() => {
+    console.log("User deleted from store!");
+  });
+};
 
 const submitProductForm = async () => {
-  const errors = {}
+  const errors = {};
   for (const [key, value] of Object.entries(payload.value)) {
     if (!value) {
-      errors[key] = `${key} is required`
+      errors[key] = `${key} is required`;
     }
   }
   if (Object.keys(errors).length === 0) {
-    await store.dispatch('addAProduct', payload.value)
+    await store.dispatch("addAProduct", payload.value);
     payload.value = {
-      name: '',
-      price: '',
-      category: '',
-      description: ''
-    }
+      name: "",
+      price: "",
+      category: "",
+      description: "",
+    };
   } else {
-    console.log(errors) // Handle errors appropriately
+    console.log(errors); // Handle errors appropriately
   }
-}
+};
 </script>
 
 <style scoped>
