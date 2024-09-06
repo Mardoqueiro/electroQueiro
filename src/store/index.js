@@ -16,9 +16,16 @@ export default createStore({
     recentProducts: null,
     product: null,
     token: localStorage.getItem('token') || '',
+    cart: []
   },
   getters: {
     isAuthenticated: state => !!state.token,
+    cartTotal: (state) => {
+      return state.cart.reduce((total, item) => total + item.price * item.quantity, 0)
+    },
+    cartItemCount: (state) => {
+      return state.cart.reduce((count, item) => count + item.quantity, 0)
+    }
   },
   mutations: {
     setUsers(state, value) {
@@ -44,6 +51,26 @@ export default createStore({
       state.token = '';
       localStorage.removeItem('token');
     },
+    addToCart(state, product) {
+      const existingProduct = state.cart.find(item => item.prodID === product.prodID);
+      if (existingProduct) {
+        existingProduct.quantity++;
+      } else {
+        state.cart.push({ ...product, quantity: 1 });
+      }
+    },
+    removeFromCart(state, productId) {
+      const index = state.cart.findIndex(item => item.prodID === productId);
+      if (index !== -1) {
+        state.cart.splice(index, 1);
+      }
+    },
+    updateCartItemQuantity(state, { productId, quantity }) {
+      const item = state.cart.find(item => item.prodID === productId);
+      if (item) {
+        item.quantity = quantity;
+      }
+    }
   },
   actions: {
     // Users
@@ -301,6 +328,15 @@ export default createStore({
         });
       }
     },
+    addToCart({ commit }, product) {
+      commit('addToCart', product);
+    },
+    removeFromCart({ commit }, productId) {
+      commit('removeFromCart', productId);
+    },
+    updateCartItemQuantity({ commit }, payload) {
+      commit('updateCartItemQuantity', payload);
+    }
   },
   modules: {},
 });

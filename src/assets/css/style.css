@@ -51,7 +51,7 @@
 --text-color:rgb(186, 190, 196);
 --text-color-light:rgb(136, 139, 145);
 --white-color:#fff;
---body-color:rgb(10, 10, 11);
+--body-color:#000000; 
 --container-color:rgb(17, 18, 19);
 
 /* ====== font and typography ======== */
@@ -93,7 +93,7 @@ html {
 body {
   font-family:var(--body-font);
   font-size: var(--normal-font-size);
-  background-color:var(--body-color);
+  /* background-color:var(--body-color); */
   color: var(--text-color);
 }
 

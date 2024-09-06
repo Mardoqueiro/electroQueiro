@@ -50,10 +50,11 @@
   </section>
 
   <div class="row mt-4">
-    <div class="col-12">
+    <div class="col-12 d-flex justify-content-between align-items-center">
       <router-link to="/checkout" class="btn btn-primary btn-lg">
-        Go to Checkout
+        Go to Checkout ({{ cartItemCount }} items)
       </router-link>
+      <h3>Total: R{{ cartTotal.toFixed(2) }}</h3>
     </div>
   </div>
 </template>
@@ -70,6 +71,8 @@ import 'vue3-toastify/dist/index.css'
 const store = useStore()
 const products = computed(() => store.state.products)
 const currentFilter = ref('all')
+const cartItemCount = computed(() => store.getters.cartItemCount)
+const cartTotal = computed(() => store.getters.cartTotal)
 
 const uniqueBrands = computed(() => {
   if (!products.value) return []

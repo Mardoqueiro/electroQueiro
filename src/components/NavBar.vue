@@ -4,10 +4,10 @@
   <!-- ============ HEADER =========== -->
   <header class="header" id="header">
         <nav class="nav container">
-          <a href="/" class="nav__logo">
+          <router-link to="/" class="nav__logo">
             <i class="ri-steering-2-line"></i>
             Electro Quéiro
-          </a>
+          </router-link>
   
           <div class="nav__menu" id="nav-menu">
             <ul class="nav__list">
@@ -15,22 +15,22 @@
                 <router-link to="/" class="nav__link active-link"><span>Home</span></router-link>
               </li>
               <li class="nav__item">
-                <a href="/about" class="nav__link"><span>About</span></a>
+                <router-link to="/about" class="nav__link"><span>About</span></router-link>
               </li>
               <li class="nav__item">
-                <a href="/products" class="nav__link"><span>Cars</span></a>
+                <router-link to="/products" class="nav__link"><span>Cars</span></router-link>
               </li>
               <li class="nav__item">
-                <a href="/checkout" class="nav__link"><span>Cart</span></a>
+                <router-link to="/checkout" class="nav__link"><span>Cart</span></router-link>
               </li>
               <li class="nav__item">
-                <a href="/admin" class="nav__link"><span>Admin</span></a>
+                <router-link to="/admin" class="nav__link"><span>Admin</span></router-link>
               </li>
               <li class="nav__item">
-                <a href="/contactus" class="nav__link"><span>Contact Us</span></a>
+                <router-link to="/contact" class="nav__link"><span>Contact Us</span></router-link>
               </li>
               <li class="nav__item">
-                <a href="/signup" class="nav__link"><span>Us</span></a>
+                <router-link to="/signup" class="nav__link"><span>Us</span></router-link>
               </li>
               <ul class="userAccount navbar-nav">
             <li class="nav-item">
