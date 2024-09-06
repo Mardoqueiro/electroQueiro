@@ -1,51 +1,59 @@
 <template>
-  <div>
-    <NavBar />
-    <div class="container">
-      <div class="row">
-        <h2 class="display-2">Products</h2>
-      </div>
-      <div class="row gap-2 justify-content-center my-2" v-if="products && products.length">
+  <NavBar/>
+  
+  <section class="featured section" id="featured">
+    <h2 class="section__title">Featured Luxury Cars</h2>
+
+    <div class="featured__container container">
+      <ul class="featured__filters">
+        <li>
+          <button class="featured__item" :class="{ 'active-featured': currentFilter === 'all' }" @click="setFilter('all')">
+            <span>All</span>
+          </button>
+        </li>
+        <li v-for="brand in uniqueBrands" :key="brand">
+          <button class="featured__item" :class="{ 'active-featured': currentFilter === brand }" @click="setFilter(brand)">
+            <span>{{ brand }}</span>
+          </button>
+        </li>
+      </ul>
+
+      <div class="featured__content grid">
         <Card
-          v-for="product in products"
+          v-for="product in filteredProducts"
           :key="product.prodID"
-          class="products"
+          class="featured__card mix"
         >
           <template #cardHeader>
             <img
               :src="product.imageURL"
-              loading="lazy"
-              class="img-fluid"
               :alt="product.prodName"
+              class="featured__img"
             />
           </template>
           <template #cardBody>
-            <h5 class="card-title fw-bold">{{ product.prodName }}</h5>
-            <p class="lead">
-              <span class="text-success fw-bold">Price</span>: R{{ product.price }}
-            </p>
-            <div class="button-wrapper d-md-flex d-block justify-content-between">
-              <router-link :to="{ name: 'products', params: { id: product.prodID } }">
-                <button class="btn btn-success">View</button>
-              </router-link>
-              <button class="btn btn-dark" @click="addToCart(product)">
-                <i class="ri-shopping-bag-2-line"></i> Add to Cart
-              </button>
-            </div>
+            <h1 class="featured__title">{{ product.prodBrand }}</h1>
+            <h3 class="featured__subtitle">{{ product.prodName }}</h3>
+            <h3 class="featured__price">R{{ product.price }}</h3>
+          </template>
+          <template #cardFooter>
+            <button class="featured__button" @click="addToCart(product)">
+              Add to Cart
+            </button>
           </template>
         </Card>
       </div>
-      <div v-else>
-        <Spinner />
-      </div>
-      <!-- Add this button at the bottom of the container -->
-      <div class="row mt-4">
-        <div class="col-12">
-          <router-link to="/checkout" class="btn btn-primary btn-lg">
-            Go to Checkout
-          </router-link>
-        </div>
-      </div>
+    </div>
+    <div v-if="!products || products.length === 0">
+      <Spinner />
+    </div>
+  </section>
+
+  <div class="row mt-4">
+    <div class="col-12">
+      <router-link to="/checkout" class="btn btn-primary btn-lg">
+        Go to Checkout
+      </router-link>
     </div>
   </div>
 </template>
@@ -53,27 +61,42 @@
 <script setup>
 import NavBar from '@/components/NavBar.vue'
 import { useStore } from 'vuex'
-import { ref, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import Card from '@/components/Card.vue'
 import Spinner from '@/components/Spinner.vue'
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
 
 const store = useStore()
-const products = ref([])
+const products = computed(() => store.state.products)
+const currentFilter = ref('all')
+
+const uniqueBrands = computed(() => {
+  if (!products.value) return []
+  return [...new Set(products.value.map(product => product.prodBrand))]
+})
+
+const filteredProducts = computed(() => {
+  if (currentFilter.value === 'all') return products.value
+  return products.value.filter(product => product.prodBrand === currentFilter.value)
+})
+
+const setFilter = (brand) => {
+  currentFilter.value = brand
+}
 
 onMounted(async () => {
   await store.dispatch('fetchProducts')
-  products.value = store.state.products
 })
 
 const addToCart = (product) => {
   store.dispatch('addToCart', product)
+  toast.success(`${product.prodName} added to cart!`, {
+    autoClose: 2000,
+  })
 }
 </script>
 
 <style scoped>
-  /* img {
-      aspect-ratio: 1;
-      object-fit: cover;
-      object-position: center;
-  } */
+  
 </style>
