@@ -55,7 +55,7 @@
           </div>
         </div>
 
-        <a href="#" class="home__button">START</a>
+        <a href="#" class="home__button" @click.prevent="playStartSound">START</a>
       </div>
     </section>
 
@@ -233,6 +233,17 @@ export default {
   components: {
     Card,
     Spinner,
+  },
+  data() {
+    return {
+      startSound: new Audio(require('../assets/audio/utomp3.com - Porsche Taycan exhaust sound revs start up sound Porsche Electric Sport Sound-[AudioTrimmer.com].mp3'))
+    }
+  },
+  methods: {
+    playStartSound() {
+      this.startSound.play();
+      // Add any other actions you want to perform when START is clicked
+    }
   },
   computed: {
     recentProducts() {
