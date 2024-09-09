@@ -1,4 +1,5 @@
 <template>
+  <main class="main">
   <div class="signup-container">
     <h1>Sign Up</h1>
     <form v-if="!loading" @submit.prevent="register">
@@ -103,6 +104,7 @@
       </div>
     </div>
   </div>
+  </main>
 </template>
 
 <script>
@@ -150,6 +152,12 @@ export default {
 </script>
 
 <style scoped>
+main {
+  padding: 2rem 0;
+  background-color: var(--container-color);
+  color: var(--text-color);
+}
+
 .signup-container {
   width: 25rem;
   margin: 0 auto;

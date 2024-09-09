@@ -1,4 +1,5 @@
 <template>
+  <main class="main">
   <div class="section">
     <div class="container">
       <div class="row full-height justify-content-center">
@@ -95,6 +96,7 @@
       </div>
     </div>
   </div>
+  </main>
 </template>
 
 <script>
@@ -105,7 +107,11 @@ export default {
 </script>
 
 <style scoped>
-
+main {
+  padding: 2rem 0;
+  background-color: var(--container-color);
+  color: var(--text-color);
+}
 
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
 

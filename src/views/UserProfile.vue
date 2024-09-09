@@ -39,6 +39,12 @@ const handleSubmit = async () => {
 </script>
 
 <style scoped>
+main {
+  padding: 2rem 0;
+  background-color: var(--container-color);
+  color: var(--text-color);
+}
+
 @media (max-width: 768px) {
 
 }

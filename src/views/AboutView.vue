@@ -1,5 +1,6 @@
 <template>
-  <div class="container">
+  <main class="main">
+  <!-- <div class="section"> -->
     <div class="row">
        <!-- ======== ABOUT ==============-->
        <section class="about section" id="about">
@@ -36,7 +37,8 @@
       </section>
 
     </div>
-  </div>
+  <!-- </div> -->
+  </main>
 </template>
 
 <script>
@@ -47,6 +49,11 @@ export default {
 }
 </script>
 <style scoped>
+main {
+    padding: 2rem 0;
+    background-color: var(--container-color);
+    color: var(--text-color);
+}
 
 .about-section {
   background-color: #f7f7f7;

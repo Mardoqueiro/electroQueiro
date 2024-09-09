@@ -2,7 +2,7 @@
     <NavBar />
     <section class="checkout-section">
         <div class="container mt-4">
-            <h2 class="checkout-title">Checkout</h2>
+            <h2 class="checkout-title">Cart</h2>
             <div v-if="cart.length === 0" class="text-center mt-4">
                 <p>Your cart is empty.</p>
                 <router-link to="/products" class="btn btn-primary">Continue Shopping</router-link>

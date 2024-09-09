@@ -251,4 +251,10 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+main {
+    padding: 2rem 0;
+    background-color: var(--container-color);
+    color: var(--text-color);
+}
+</style>

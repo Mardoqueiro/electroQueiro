@@ -1,4 +1,5 @@
 <template>
+  <main class="main">
   <div class="login-container">
     <h1>Login</h1>
     <form @submit.prevent="login">
@@ -17,6 +18,7 @@
     </form>
     <p v-if="error" class="error">{{ error }}</p>
   </div>
+  </main>
 </template>
 
 <script>

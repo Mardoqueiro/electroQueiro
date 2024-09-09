@@ -1,5 +1,6 @@
 <template>
-  <div class="section">
+  <main class="main">
+    <div class="section">
   <div class="container-main">
     <h2>Products Table</h2>
     <input type="text" placeholder="search" />
@@ -531,6 +532,7 @@
     </div>
   </div>
 </div>
+</main>
 
 </template>
 
@@ -689,7 +691,9 @@ const submitProductForm = async () => {
 </script>
 
 <style scoped>
-.container {
-  margin-top: 2rem;
-}
+  main {
+    padding: 2rem 0;
+    background-color: var(--container-color);
+    color: var(--text-color);
+  }
 </style>

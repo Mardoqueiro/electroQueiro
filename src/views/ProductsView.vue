@@ -1,7 +1,7 @@
 <template>
-  <NavBar/>
-  
-  <section class="featured section" id="featured">
+  <main class="main">
+    <div class="section">
+  <section class="featured-section" id="featured">
     <h2 class="section__title">Featured Luxury Cars</h2>
 
     <div class="featured__container container">
@@ -44,7 +44,7 @@
         </Card>
       </div>
     </div>
-    <div v-if="!products || products.length === 0">
+    <div v-if="!filteredProducts || filteredProducts.length === 0">
       <Spinner />
     </div>
   </section>
@@ -57,10 +57,12 @@
       <h3>Total: R{{ cartTotal.toFixed(2) }}</h3>
     </div>
   </div>
+</div>
+  </main>
 </template>
 
 <script setup>
-import NavBar from '@/components/NavBar.vue'
+// import NavBar from '@/components/NavBar.vue'
 import { useStore } from 'vuex'
 import { computed, onMounted, ref } from 'vue'
 import Card from '@/components/Card.vue'
@@ -80,6 +82,7 @@ const uniqueBrands = computed(() => {
 })
 
 const filteredProducts = computed(() => {
+  if (!products.value) return []
   if (currentFilter.value === 'all') return products.value
   return products.value.filter(product => product.prodBrand === currentFilter.value)
 })
@@ -89,7 +92,9 @@ const setFilter = (brand) => {
 }
 
 onMounted(async () => {
-  await store.dispatch('fetchProducts')
+  if (!products.value || products.value.length === 0) {
+    await store.dispatch('fetchProducts')
+  }
 })
 
 const addToCart = (product) => {
@@ -101,7 +106,7 @@ const addToCart = (product) => {
 </script>
 
 <style scoped>
-  .checkout-section {
+main {
     padding: 2rem 0;
     background-color: var(--container-color);
     color: var(--text-color);
