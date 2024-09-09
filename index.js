@@ -27,7 +27,9 @@ app.use(
     express.urlencoded({
         extended: true
     }),
-    cors()
+    cors({
+        origin: 'http://localhost:8080'
+    })
 )
 
 app.get('^/$|/eShop', (req, res) => {
