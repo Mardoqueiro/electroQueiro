@@ -1,4 +1,5 @@
 <template>
+  <div class="section">
   <div class="container">
       <div class="row">
           <h2 class="display-2">Register</h2>
@@ -47,6 +48,7 @@
           </form>
       </div>
   </div>
+</div>
 </template>
 
 <script setup>
@@ -59,7 +61,6 @@ const payload = reactive({
   age: '',
   emailAdd: '',
   pwd: '',
-  profileURL: 'https://i.postimg.cc/3rZ0H0D8/profile-Image.png'
 })
 function register() {
   store.dispatch('register', payload)

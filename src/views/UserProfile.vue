@@ -1,10 +1,12 @@
 <template>
+  <div class="section">
   <div class="register-form">
     <form @submit.prevent="handleSubmit">
       <!-- Form fields with v-model and validation -->
       <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
       <button type="submit" :disabled="!isFormValid">Register</button>
     </form>
+    </div>
   </div>
 </template>
 

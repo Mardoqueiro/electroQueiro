@@ -101,5 +101,9 @@ const addToCart = (product) => {
 </script>
 
 <style scoped>
-  
+  .checkout-section {
+    padding: 2rem 0;
+    background-color: var(--container-color);
+    color: var(--text-color);
+}
 </style>

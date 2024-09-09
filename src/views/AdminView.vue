@@ -1,4 +1,5 @@
 <template>
+  <div class="section">
   <div class="container-main">
     <h2>Products Table</h2>
     <input type="text" placeholder="search" />
@@ -533,6 +534,8 @@
       </table>
     </div>
   </div>
+</div>
+
 </template>
 
 <script setup>
