@@ -251,11 +251,7 @@
             </td>
           </tr>
         </tbody>
-        <tbody v-else>
-          <tr>
-            <td colspan="6">Loading...</td>
-          </tr>
-        </tbody>
+        <div v-else><Spinner /></div>
       </table>
 
       <h2>Users Table</h2>

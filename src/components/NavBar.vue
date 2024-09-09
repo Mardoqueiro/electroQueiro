@@ -68,70 +68,47 @@
       <div class="nav__menu" id="nav-menu">
         <ul class="nav__list">
           <li class="nav__item">
-            <router-link to="/" class="nav__link active-link"
-              ><span>Home</span></router-link
-            >
+            <router-link to="/" class="nav__link active-link"><span>Home</span></router-link>
           </li>
           <li class="nav__item">
-            <router-link to="/about" class="nav__link"
-              ><span>About</span></router-link
-            >
+            <router-link to="/about" class="nav__link"><span>About</span></router-link>
           </li>
           <li class="nav__item">
-            <router-link to="/products" class="nav__link"
-              ><span>Cars</span></router-link
-            >
+            <router-link to="/products" class="nav__link"><span>Cars</span></router-link>
           </li>
           <li class="nav__item">
-            <router-link to="/checkout" class="nav__link"
-              ><span>Cart</span></router-link
-            >
+            <router-link to="/checkout" class="nav__link"><span>Cart</span></router-link>
           </li>
           <li class="nav__item">
-            <router-link to="/admin" class="nav__link"
-              ><span>Admin</span></router-link
-            >
+            <router-link to="/admin" class="nav__link"><span>Admin</span></router-link>
           </li>
           <li class="nav__item">
-            <router-link to="/contact" class="nav__link"
-              ><span>Contact Us</span></router-link
-            >
+            <router-link to="/contact" class="nav__link"><span>Contact Us</span></router-link>
+          </li>
+
+          <li class="nav__item">
+            <router-link to="/signup" class="nav__link"><span>Sign Up</span></router-link>
           </li>
           <li class="nav__item">
-            <router-link to="/signup" class="nav__link"
-              ><span>Us</span></router-link
-            >
+            <router-link to="/login" class="nav__link"><span>Login</span></router-link>
           </li>
-          <li v-if="userRole === 'Admin'" class="nav-item">
-            <router-link
-              class="nav-link"
-              to="/admin"
-              exact-active-class="active-link"
-              aria-current="page"
-              >Admin</router-link
-            >
+
+
+          <!-- <li v-if="userRole === 'Admin'" class="nav-item">
+            <router-link class="nav-link" to="/admin" exact-active-class="active-link"
+              aria-current="page">Admin</router-link>
           </li>
           <li class="nav-item">
-            <router-link
-              class="nav-link"
-              to="/contact"
-              exact-active-class="active-link"
-              aria-current="page"
-              >Contact Info</router-link
-            >
+            <router-link class="nav-link" to="/contact" exact-active-class="active-link" aria-current="page">Contact
+              Info</router-link>
           </li>
           <ul class="userAccount navbar-nav">
             <li class="nav-item">
-              <router-link
-                class="nav-link"
-                to="/profile"
-                exact-active-class="active-link"
-                aria-current="page"
-                >Profile</router-link
-              >
+              <router-link class="nav-link" to="/profile" exact-active-class="active-link"
+                aria-current="page">Profile</router-link>
             </li>
           </ul>
-          <li><button @click="logout">Logout</button></li>
+          <li><button @click="logout">Logout</button></li> -->
         </ul>
 
         <div class="nav__close" id="nav-close">
