@@ -104,4 +104,7 @@ footer {
     color: var(--text-color);
 }
 
+.footer__link {
+    text-decoration: none;
+}
 </style>
