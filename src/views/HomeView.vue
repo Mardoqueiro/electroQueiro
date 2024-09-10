@@ -145,7 +145,7 @@
           <!-- <div class="row">
             <h4 class="display-4">Recent cars</h4>
           </div> -->
-          <div class="row gap-2 justify-content-center" v-if="recentProducts">
+          <div v-if="recentProducts && recentProducts.length > 0" class="row gap-2 justify-content-center">
             <Card v-for="product in recentProducts" :key="product.productID">
               <template #cardHeader>
                 {{ product.productURL }}
@@ -260,7 +260,7 @@
     </section>
 
     <!-- ========= SCROLL UP ============= -->
-    <a href="/" class="scrollup" id="scroll-up">
+    <a href="#" class="scrollup" id="scroll-up" @click.prevent="scrollToTop" v-show="showScrollUp">
       <i class="ri-arrow-up-line"></i>
     </a>
   </main>
@@ -278,14 +278,21 @@ export default {
   },
   data() {
     return {
-      startSound: new Audio(require('../assets/audio/utomp3.com - Porsche Taycan exhaust sound revs start up sound Porsche Electric Sport Sound-[AudioTrimmer.com].mp3'))
+      startSound: new Audio(require('../assets/audio/utomp3.com - Porsche Taycan exhaust sound revs start up sound Porsche Electric Sport Sound-[AudioTrimmer.com].mp3')),
+      showScrollUp: false,
     }
   },
   methods: {
     playStartSound() {
       this.startSound.play();
       // Add any other actions you want to perform when START is clicked
-    }
+    },
+    scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+    toggleScrollUp() {
+      this.showScrollUp = window.scrollY > 200;
+    },
   },
   computed: {
     recentProducts() {
@@ -294,6 +301,10 @@ export default {
   },
   mounted() {
     this.$store.dispatch("fetchProducts");
+    window.addEventListener('scroll', this.toggleScrollUp);
+  },
+  unmounted() {
+    window.removeEventListener('scroll', this.toggleScrollUp);
   },
   created() {
     console.log("Initial recentProducts:", this.recentProducts);
@@ -311,5 +322,23 @@ main {
   color: var(--text-color);
 }
 
+.scrollup {
+  position: fixed;
+  right: 1rem;
+  bottom: -20%;
+  background-color: var(--first-color);
+  padding: 0.5rem;
+  border-radius: 0.4rem;
+  transition: .4s;
+  z-index: 10;
+}
 
+.scrollup:hover {
+  background-color: var(--first-color-alt);
+}
+
+.scrollup i {
+  color: #fff;
+  font-size: 1.2rem;
+}
 </style>
