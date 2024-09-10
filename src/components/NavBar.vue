@@ -125,8 +125,25 @@
 </template>
 
 <style scoped>
-span {
-  position: relative;
+.nav__link {
+  text-decoration: none;
+}
+
+.nav__link:hover {
+  color: rgb(65, 120, 220);
+}
+
+.nav__link:hover::before,
+.nav__link:hover::after {
+  transform: scaleX(1);
+}
+
+.nav__logo {
+  text-decoration: none;
+}
+
+.nav__logo:hover {
+  color: rgb(65, 120, 220);
 }
 
 span::before,

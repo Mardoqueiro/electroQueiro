@@ -1,6 +1,5 @@
 <template>
   <main class="main">
-  <!-- <div class="section"> -->
     <div class="row">
        <!-- ======== ABOUT ==============-->
        <section class="about section" id="about">

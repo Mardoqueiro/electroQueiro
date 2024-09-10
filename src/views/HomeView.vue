@@ -59,6 +59,48 @@
       </div>
     </section>
 
+     <!-- ======== FEATURES ============= -->
+     <section class="features section">
+        <h2 class="section__title">More Features</h2>
+
+        <div class="features__container container grid">
+          <div class="features__group">
+            <img
+              src="https://raw.githubusercontent.com/bedimcode/responsive-car-website/main/assets/img/features.png"
+              alt=""
+              class="features__img"
+            />
+            <div class="features__card features__card-1">
+              <h3 class="features__card-title">800v</h3>
+              <p class="features__card-description">Turbo <br />Chargin</p>
+            </div>
+
+            <div class="features__card features__card-2">
+              <h3 class="features__card-title">350</h3>
+              <p class="features__card-description">
+                Km <br />
+                Range
+              </p>
+            </div>
+
+            <div class="features__card features__card-3">
+              <h3 class="features__card-title">480</h3>
+              <p class="features__card-description">
+                Km <br />
+                Travel
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <img
+          src="https://raw.githubusercontent.com/bedimcode/responsive-car-website/d695ce21f8309425a8a0ccc64f49408848b04b4b/assets/img/map.svg  "
+          alt=""
+          class="features__map"
+        />
+      </section>
+
+
     <!-- ========== POPULAR =========== -->
     <section class="popular section" id="popular">
       <h2 class="section__title">
@@ -264,8 +306,10 @@ export default {
 
 <style scoped>
 main {
-    padding: 2rem 0;
-    background-color: var(--container-color);
-    color: var(--text-color);
+  padding: 2rem 0;
+  background-color: var(--container-color);
+  color: var(--text-color);
 }
+
+
 </style>
