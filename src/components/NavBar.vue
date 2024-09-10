@@ -87,11 +87,11 @@
           </li>
 
           <li class="nav__item">
-            <router-link to="/signup" class="nav__link"><span>Sign Up</span></router-link>
+            <router-link to="/signup" class="nav__link"><span>Sign-Up/Login</span></router-link>
           </li>
-          <li class="nav__item">
+          <!-- <li class="nav__item">
             <router-link to="/login" class="nav__link"><span>Login</span></router-link>
-          </li>
+          </li> -->
 
 
           <!-- <li v-if="userRole === 'Admin'" class="nav-item">

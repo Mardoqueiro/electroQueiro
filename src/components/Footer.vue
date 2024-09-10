@@ -14,7 +14,7 @@
             the world.
           </p>
           <p class="lead">
-              EQ &copy; <span id="currYear"></span>
+              EQ &copy; - <span id="currYear"></span> | All Rights Reserved
           </p>
         </div>
         <div class="footer__content">
@@ -85,6 +85,15 @@
 <script>
 export default {
     name: "FooterComp",
+    mounted() {
+        this.updateCurrentYear();
+    },
+    methods: {
+        updateCurrentYear() {
+            const currentYear = new Date().getFullYear();
+            document.getElementById('currYear').textContent = currentYear;
+        }
+    }
 }
 </script>
 
