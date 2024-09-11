@@ -77,9 +77,11 @@
             <router-link to="/products" class="nav__link"><span>Cars</span></router-link>
           </li>
           <li class="nav__item">
-            <router-link to="/checkout" class="nav__link"><span>Cart</span></router-link>
+            <router-link to="/checkout" class="nav__link"><span>Cart</span>
+              <span class="badge bg-warning rounded-pill" counter>0</span>
+            </router-link>
           </li>
-          <li class="nav__item">
+          <li v-if="userRole === 'Admin'" class="nav-item">
             <router-link to="/admin" class="nav__link"><span>Admin</span></router-link>
           </li>
           <li class="nav__item">
@@ -94,7 +96,8 @@
           </li> -->
 
 
-          <!-- <li v-if="userRole === 'Admin'" class="nav-item">
+          <!-- 
+          <li v-if="userRole === 'Admin'" class="nav-item">
             <router-link class="nav-link" to="/admin" exact-active-class="active-link"
               aria-current="page">Admin</router-link>
           </li>
