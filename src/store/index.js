@@ -25,7 +25,8 @@ export default createStore({
     },
     cartItemCount: (state) => {
       return state.cart.reduce((count, item) => count + item.quantity, 0)
-    }
+    },
+    getUsers: state => state.users
   },
   mutations: {
     setUsers(state, value) {
@@ -76,11 +77,12 @@ export default createStore({
     // Users
     async fetchUsers({ commit }) {
       try {
-        const { result } = await axios.get(`${apiURL}users`);
-        commit('setUsers', result);
+        const response = await fetch('your-api-endpoint/users')
+        const users = await response.json()
+        console.log('Fetched users:', users) // Log fetched users
+        commit('SET_USERS', users)
       } catch (error) {
-        console.error('Failed to fetch users:', error);
-        toast.error(`Failed to fetch users: ${error.message}`, { autoClose: 2000 });
+        console.error('Error fetching users:', error)
       }
     },
 

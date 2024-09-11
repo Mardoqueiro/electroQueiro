@@ -1,10 +1,9 @@
 <template>
-  <div>
-    <NavBar/>
     <!-- Loading Spinner -->
     <div v-if="loading" class="loading-spinner">
       <Spinner />
     </div>
+    <main class="main">
     <!-- USERS TABLE -->
     <h2>Users Table</h2>
     <addUser/>
@@ -79,13 +78,13 @@
         </tbody>
       </table>
     </div>
-  </div>
   <div>
   </div>
+</main>
 </template>
 
 <script>
-import NavBar from '@/components/NavBar.vue'
+// import NavBar from '@/components/NavBar.vue'
 import updateUser from '@/components/UpdateUser.vue';
 import updateProduct from '@/components/UpdateProduct.vue';
 import addProduct from '@/components/AddProduct.vue';
@@ -94,7 +93,7 @@ import Spinner from '@/components/Spinner.vue';
 
 export default {
   components: {
-    NavBar,
+    // NavBar,
     updateUser,
     updateProduct,
     addProduct,
@@ -116,6 +115,7 @@ export default {
   },
   mounted() {
     this.loadData();
+    console.log('Users:', this.users); // Add this line
   },
   methods: {
     async loadData() {

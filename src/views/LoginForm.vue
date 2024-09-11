@@ -218,7 +218,6 @@ export default {
       payload: {
         firstName: "",
         lastName: "",
-        userAge: null,
         Gender: "",
         userRole: "",
         emailAdd: "",

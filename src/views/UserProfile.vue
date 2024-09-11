@@ -10,7 +10,7 @@
       </div>
       <!-- Loading Spinner -->
       <div v-if="loading" class="loading-spinner">
-        <SpinnerComp />
+        <Spinner />
       </div>
       
       <!-- USER PROFILE -->
@@ -28,10 +28,6 @@
             <tr>
               <td class="label">Last Name:</td>
               <td>{{ user.lastName }}</td>
-            </tr>
-            <tr>
-              <td class="label">User Age:</td>
-              <td>{{ user.userAge }}</td>
             </tr>
             <tr>
               <td class="label">Gender:</td>
@@ -69,16 +65,15 @@
 
 <script>
 import NavBar from '@/components/NavBar.vue';
-import SpinnerComp from '@/components/SpinnerComp.vue';
+import Spinner from '@/components/Spinner.vue';
 import { useCookies } from 'vue3-cookies';
 import updateUser from '@/components/UpdateUser.vue';
-
 const { cookies } = useCookies();
 
 export default {
   components: {
     NavBar,
-    SpinnerComp,
+    Spinner,
     updateUser,
   },
   data() {
@@ -115,7 +110,6 @@ export default {
         userID: user.userID,
         firstName: user.firstName,
         lastName: user.lastName,
-        userAge: user.userAge,
         Gender: user.Gender,
         userRole: user.userRole,
         emailAdd: user.emailAdd,
