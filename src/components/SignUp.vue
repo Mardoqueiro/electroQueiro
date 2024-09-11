@@ -24,15 +24,6 @@
           </div>
           <div class="mb-3">
             <input
-              type="number"
-              class="form-control mx-auto"
-              placeholder="Age"
-              v-model="payload.userAge"
-              required
-            />
-          </div>
-          <div class="mb-3">
-            <input
               type="text"
               class="form-control mx-auto"
               placeholder="Gender"
@@ -120,7 +111,6 @@
         payload: {
           firstName: "",
           lastName: "",
-          userAge: null,
           Gender: "",
           userRole: "",
           emailAdd: "",

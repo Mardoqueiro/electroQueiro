@@ -87,7 +87,6 @@ main {
   margin-bottom: 0;
 }
 
-/* From Uiverse.io by adamgiebl */ 
 .button {
   --green: #1BFD9C;
   font-size: 15px;

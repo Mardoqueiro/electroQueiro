@@ -3,7 +3,7 @@
     <div class="container-fluid" id="navbar">
       <router-link class="navbar-brand" to="/">
         <img
-          src="https://anushqakandan.github.io/Capstone_images/logo.jpg"
+          src=""
           alt="logo"
           class="img-thumbnail"
           loading="lazy"

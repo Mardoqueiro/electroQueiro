@@ -19,16 +19,13 @@
                 <input type="text" class="form-control w-50 mx-auto" placeholder="last name" v-model="payload.lastName">
               </div>
               <div class="mb-3">
-                <input type="number" class="form-control w-50 mx-auto" placeholder="user age" v-model="payload.userAge">
-              </div>
-              <div class="mb-3">
                 <input type="text" class="form-control w-50 mx-auto" placeholder="gender" v-model="payload.Gender">
               </div>
               <div class="mb-3">
-                <input type="text" class="form-control w-50 mx-auto" placeholder="user role" v-model="payload.userRole">
+                <input type="text" class="form-control w-50 mx-auto" placeholder="email address" v-model="payload.emailAdd">
               </div>
               <div class="mb-3">
-                <input type="text" class="form-control w-50 mx-auto" placeholder="email address" v-model="payload.emailAdd">
+                <input type="text" class="form-control w-50 mx-auto" placeholder="user role" v-model="payload.userRole">
               </div>
               <div class="mb-3">
                 <input type="text" class="form-control w-50 mx-auto" placeholder="user password" v-model="payload.userPass">
@@ -56,10 +53,9 @@
           userID: this.user.userID,
           firstName: this.user.firstName,
           lastName: this.user.lastName,
-          userAge: this.user.userAge,
           Gender: this.user.Gender,
-          userRole: this.user.userRole,
           emailAdd:  this.user.emailAdd,
+          userRole: this.user.userRole,
           userPass: this.user.userPass,
           userProfile: this.user.userProfile
         }
