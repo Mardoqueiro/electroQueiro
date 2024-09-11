@@ -23,21 +23,27 @@
             />
           </div>
           <div class="mb-3">
-            <input
-              type="text"
+            <select
               class="form-control mx-auto"
-              placeholder="Gender"
               v-model="payload.Gender"
               required
-            />
+            >
+              <option value="" disabled selected>Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
           </div>
           <div class="mb-3">
-            <input
-              type="text"
+            <select
               class="form-control mx-auto"
-              placeholder="Role e.g. user"
               v-model="payload.userRole"
-            />
+              required
+            >
+              <option value="" disabled selected>Select Role</option>
+              <option value="User">User</option>
+              <option value="Admin">Admin</option>
+            </select>
           </div>
           <div class="mb-3">
             <input

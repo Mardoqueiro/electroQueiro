@@ -81,8 +81,8 @@
               <span class="badge bg-warning rounded-pill" counter>0</span>
             </router-link>
           </li>
-          <!-- v-show="userRole === 'Admin'"  -->
-          <li class="nav-item">
+           
+          <li v-show="userRole === 'Admin'" class="nav-item">
             <router-link to="/admin" class="nav__link"><span>Admin</span></router-link>
           </li>
           <li class="nav__item">
@@ -94,13 +94,6 @@
           </li>
           <li class="nav__item">
             <router-link to="/login" class="nav__link"><span>Login</span></router-link>
-          </li>
-
-
-          
-          <li class="nav-item">
-            <router-link class="nav-link" to="/contact" exact-active-class="active-link" aria-current="page">Contact
-              Info</router-link>
           </li>
           <ul class="userAccount navbar-nav">
             <li class="nav-item">
