@@ -16,7 +16,7 @@ export default createStore({
     recentProducts: null,
     product: null,
     token: localStorage.getItem('token') || '',
-    cart: []
+    cart: JSON.parse(cookies.get('cart')) || []
   },
   getters: {
     isAuthenticated: state => !!state.token,
@@ -58,6 +58,8 @@ export default createStore({
         existingProduct.quantity++;
       } else {
         state.cart.push({ ...product, quantity: 1 });
+        cookies.set('cart', JSON.stringify(state.cart));
+        
       }
     },
     removeFromCart(state, productId) {
@@ -77,10 +79,10 @@ export default createStore({
     // Users
     async fetchUsers({ commit }) {
       try {
-        const response = await fetch('your-api-endpoint/users')
+        const response = await fetch(`${apiURL}users`)
         const users = await response.json()
         console.log('Fetched users:', users) // Log fetched users
-        commit('SET_USERS', users)
+        commit('setUsers', users)
       } catch (error) {
         console.error('Error fetching users:', error)
       }

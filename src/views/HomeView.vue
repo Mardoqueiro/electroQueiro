@@ -104,7 +104,7 @@
     <!-- ========== POPULAR =========== -->
     <section class="popular section" id="popular">
       <h2 class="section__title">
-        Chose Your Electric Car <br />
+        Choose Your Electric Car <br />
         Of The Porsche Brand
       </h2>
 
@@ -142,13 +142,9 @@
             </button>
           </article>
 
-          <!-- <div class="row">
-            <h4 class="display-4">Recent cars</h4>
-          </div> -->
-          <div v-if="recentProducts && recentProducts.length > 0" class="row gap-2 justify-content-center">
+          <!-- <div v-if="recentProducts && recentProducts.length > 0" class="row gap-2 justify-content-center">
             <Card v-for="product in recentProducts" :key="product.productID">
               <template #cardHeader>
-                {{ product.productURL }}
                 <img
                   :src="product.prodURL"
                   loading="lazy"
@@ -169,7 +165,7 @@
           </div>
           <div v-else>
             <Spinner />
-          </div>
+          </div> -->
         </div>
         <div class="swiper-pagination"></div>
       </div>
@@ -267,13 +263,13 @@
 </template>
 
 <script>
-import Card from "@/components/Card.vue";
+// import Card from "@/components/Card.vue";
 import Spinner from "@/components/Spinner.vue";
 
 export default {
   name: "HomeView",
   components: {
-    Card,
+    // Card,
     Spinner,
   },
   data() {
@@ -296,10 +292,12 @@ export default {
   },
   computed: {
     recentProducts() {
+      console.log("Computed recentProducts:", this.$store.state.recentProducts);
       return this.$store.state.recentProducts;
     },
   },
   mounted() {
+    console.log("Mounting component, dispatching fetchProducts");
     this.$store.dispatch("fetchProducts");
     window.addEventListener('scroll', this.toggleScrollUp);
   },
