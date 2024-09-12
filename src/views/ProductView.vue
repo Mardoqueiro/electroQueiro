@@ -27,14 +27,14 @@
       </div>
     </div>
     <div v-else>
-      <SpinnerComp/>
+      <Spinner/>
     </div>
   </div>
 </template>
 
 <script>
 import NavBar from '@/components/NavBar.vue';
-import SpinnerComp from '@/components/SpinnerComp.vue';
+import Spinner from '@/components/Spinner.vue';
 
 export default {
   methods: {
@@ -59,7 +59,7 @@ export default {
     this.fetchProduct();
   },
   components: {
-    SpinnerComp,
+    Spinner,
     NavBar
   }
 }

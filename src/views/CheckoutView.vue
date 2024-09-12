@@ -153,4 +153,16 @@ const formatPrice = (price) => {
 }
 
 /* Button styles remain unchanged */
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
 </style>

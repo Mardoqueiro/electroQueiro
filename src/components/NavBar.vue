@@ -68,7 +68,7 @@
       <div class="nav__menu" id="nav-menu">
         <ul class="nav__list">
           <li class="nav__item">
-            <router-link to="/" class="nav__link active-link"><span>Home</span></router-link>
+            <router-link to="/home" class="nav__link active-link"><span>Home</span></router-link>
           </li>
           <li class="nav__item">
             <router-link to="/about" class="nav__link"><span>About</span></router-link>
@@ -116,6 +116,29 @@
     </nav>
   </header>
 </template>
+
+<script>
+export default {
+  name: 'NavBar',
+  mounted() {
+    const navMenu = document.getElementById('nav-menu');
+    const navToggle = document.getElementById('nav-toggle');
+    const navClose = document.getElementById('nav-close');
+
+    if (navToggle) {
+      navToggle.addEventListener('click', () => {
+        navMenu.classList.add('show-menu');
+      });
+    }
+
+    if (navClose) {
+      navClose.addEventListener('click', () => {
+        navMenu.classList.remove('show-menu');
+      });
+    }
+  }
+}
+</script>
 
 <style scoped>
 .nav__link {
@@ -172,25 +195,3 @@ span:hover::after {
 }
 </style>
 
-<script>
-export default {
-  name: 'NavBar',
-  mounted() {
-    const navMenu = document.getElementById('nav-menu');
-    const navToggle = document.getElementById('nav-toggle');
-    const navClose = document.getElementById('nav-close');
-
-    if (navToggle) {
-      navToggle.addEventListener('click', () => {
-        navMenu.classList.add('show-menu');
-      });
-    }
-
-    if (navClose) {
-      navClose.addEventListener('click', () => {
-        navMenu.classList.remove('show-menu');
-      });
-    }
-  }
-}
-</script>

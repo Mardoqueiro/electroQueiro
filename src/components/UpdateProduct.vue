@@ -20,7 +20,7 @@
                 <input type="text" class="form-control w-50 mx-auto" placeholder="Product Price" v-model="payload.price">
               </div>
               <div class="mb-3">
-                <input type="text" class="form-control w-50 mx-auto" placeholder="Product Category" v-model="payload.prodBrand">
+                <input type="text" class="form-control w-50 mx-auto" placeholder="Product Brand" v-model="payload.prodBrand">
               </div>
               <div class="mb-3">
                 <input type="text" class="form-control w-50 mx-auto" placeholder="Product URL" v-model="payload.imageURL">

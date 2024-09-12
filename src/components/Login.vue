@@ -1,33 +1,4 @@
 <template>
-  <div class="login">
-    <h2>Login</h2>
-    <form @submit.prevent="handleLogin">
-      <input v-model="email" type="email" placeholder="Email" required>
-      <input v-model="password" type="password" placeholder="Password" required>
-      <button type="submit">Login</button>
-    </form>
-  </div>
-</template>
-
-<script>
-export default {
-  name: 'LoginForm',
-  data() {
-    return {
-      email: '',
-      password: ''
-    }
-  },
-  methods: {
-    handleLogin() {
-      console.log('Login:', this.email, this.password);
-    }
-  }
-}
-</script>
-
-<!-- 
-<template>
   <div class="login-container">
     <h1>Login</h1>
     <form @submit.prevent="login">
@@ -49,9 +20,8 @@ export default {
 </template>
 
 <script>
-// import axios from 'axios';
-
 export default {
+  name: 'LoginForm',
   data() {
     return {
       emailAdd: '',
@@ -69,4 +39,56 @@ export default {
 
   }
 };
-</script> -->
+</script> 
+
+<style scoped>
+.login-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.button-group button {
+  flex: 1;
+  margin: 0 5px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button-group button:hover {
+  background-color: #ddd; 
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+  text-align: center;
+}
+</style>
