@@ -60,7 +60,7 @@
   <!-- ============ HEADER =========== -->
   <header class="header" id="header">
     <nav class="nav container">
-      <router-link to="/" class="nav__logo">
+      <router-link to="/home" class="nav__logo">
         <i class="ri-steering-2-line"></i>
         Electro Quéiro
       </router-link>
@@ -81,8 +81,8 @@
               <span class="badge bg-warning rounded-pill" counter>0</span>
             </router-link>
           </li>
-           
-          <li v-show="userRole === 'Admin'" class="nav-item">
+          <!-- v-show="userRole === 'Admin'" -->
+          <li  class="nav-item">
             <router-link to="/admin" class="nav__link"><span>Admin</span></router-link>
           </li>
           <li class="nav__item">
@@ -90,7 +90,7 @@
           </li>
 
           <li class="nav__item">
-            <router-link to="/signup" class="nav__link"><span>Sign-Up/Login</span></router-link>
+            <router-link to="/" class="nav__link"><span>Sign-Up/Login</span></router-link>
           </li>
           <li class="nav__item">
             <router-link to="/login" class="nav__link"><span>Login</span></router-link>

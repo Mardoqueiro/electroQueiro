@@ -1,42 +1,63 @@
 <template>
   <main class="main">
-    <div class="row">
-       <!-- ======== ABOUT ==============-->
-       <section class="about section" id="about">
-        <div class="about__container container grid">
-          <div class="about__group">
-            <img
-              src="https://raw.githubusercontent.com/bedimcode/responsive-car-website/main/assets/img/about.png"
-              alt=""
-              class="about__img"
-            />
-            <div class="about__card">
-              <h3 class="about__card-title">2.500+</h3>
-              <p class="about__card-description">
-                Supercharges places along popular routes
-              </p>
-            </div>
-          </div>
-
-          <div class="about__data">
-            <h2 class="section__title about__title">
-              Machines with <br />
-              Future Technology
-            </h2>
-
-            <p class="about__description">
-              See the future with high-perfomace electric cars produced by
-              renownes brands. They feature futuristic builds and designs with
-              new and innovative platforms that last a long time.
+    <section class="about section" id="about">
+      <div class="about__container container grid">
+        <div class="about__group">
+          <img
+            src="https://raw.githubusercontent.com/bedimcode/responsive-car-website/main/assets/img/about.png"
+            alt="Luxury car"
+            class="about__img"
+          />
+          <div class="about__card">
+            <h3 class="about__card-title">2,500+</h3>
+            <p class="about__card-description">
+              Supercharges places along popular routes
             </p>
-
-            <a href="#" class="button">Know more</a>
           </div>
         </div>
-      </section>
 
-    </div>
-  <!-- </div> -->
+        <div class="about__data">
+          <h2 class="section__title about__title">
+            Machines with <br />
+            Future Technology
+          </h2>
+
+          <p class="about__description">
+            See the future with high-performance electric cars produced by
+            renowned brands. They feature futuristic builds and designs with
+            new and innovative platforms that last a long time.
+          </p>
+
+          <a href="#" class="button">Know more</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="about__content">
+      <h1>About Luxury Wheels</h1>
+      <p>Luxury Wheels is more than just a car dealership; we're a visionary company committed to transforming the automotive landscape in South Africa and across the African continent.</p>
+      
+      <h2>Our Vision</h2>
+      <p>At Luxury Wheels, we envision a future where premium automotive experiences are accessible to a broader range of discerning customers throughout Africa. We aim to be at the forefront of this transformation, bridging the gap between luxury aspirations and attainable reality.</p>
+      
+      <h2>South African Roots, Pan-African Dreams</h2>
+      <p>Founded in South Africa, we're proud of our heritage and deeply committed to the development of our local automotive industry. However, our ambitions extend beyond borders. We see South Africa as a springboard to revolutionize the luxury car market across the entire African continent.</p>
+      
+      <h2>Empowering African Economies</h2>
+      <p>We believe that a thriving luxury automotive sector can significantly contribute to economic growth. By fostering partnerships with local businesses, investing in skills development, and creating job opportunities, we're playing our part in building a more prosperous Africa.</p>
+      
+      <h2>Sustainability and Innovation</h2>
+      <p>As we look to the future, we're dedicated to promoting sustainable luxury. This means not only offering the latest in electric and hybrid vehicles but also implementing eco-friendly practices in our operations. We're committed to reducing our carbon footprint while delivering unparalleled automotive excellence.</p>
+      
+      <h2>Customer-Centric Approach</h2>
+      <p>Our success is built on understanding and exceeding the unique needs of our African clientele. We offer personalized services, flexible financing options, and after-sales support tailored to the specific challenges and opportunities of the African market.</p>
+      
+      <h2>Building Communities</h2>
+      <p>Luxury Wheels is more than a business; we're a community builder. Through various CSR initiatives, we're actively involved in education, road safety awareness, and environmental conservation projects across Africa.</p>
+      
+      <h2>Join Our Journey</h2>
+      <p>As we continue to grow and expand our presence across Africa, we invite you to be part of our exciting journey. Experience the Luxury Wheels difference – where African pride meets global luxury standards.</p>
+    </section>
   </main>
 </template>
 
@@ -47,81 +68,157 @@ export default {
   }
 }
 </script>
+
 <style scoped>
-main {
-    padding: 2rem 0;
-    background-color: var(--container-color);
-    color: var(--text-color);
+.main {
+  padding: 2rem 1rem;
+  background-color: var(--container-color);
+  color: var(--text-color);
+  
 }
 
-.about-section {
-  background-color: #f7f7f7;
-  padding: 60px 20px; 
-  color: #333; 
-  font-family: 'Arial', sans-serif;
+.about__container {
+  display: grid;
+  gap: 2rem;
 }
 
-
-.about-section .container {
-  max-width: 800px; 
-  margin: 0 auto; 
-  text-align: left; 
+.about__group {
+  position: relative;
 }
 
-.about-section h2 {
-  font-size: 36px; 
-  color: #2c3e50;
-  margin-bottom: 20px;
-  text-align: center; 
-  font-family: 'Roboto', sans-serif;
-}
- 
-.about-section p {
-  font-size: 18px;  
-  line-height: 1.6;  
-  margin-bottom: 20px; 
-  font-family: 'Roboto', sans-serif;
+.about__img {
+  width: 100%;
+  border-radius: 0.5rem;
 }
 
-.about-section p:last-child {
-  margin-bottom: 0;
+.about__card {
+  width: 180px;
+  position: absolute;
+  right: 0;
+  bottom: -2.5rem;
+  background-color: hsla(0, 0%, 100%, .1);
+  backdrop-filter: blur(16px);
+  padding: 1rem 0.75rem;
+  text-align: center;
+  border-radius: 1.25rem;
+}
+
+.about__card-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.about__card-description {
+  font-size: 0.75rem;
+}
+
+.about__title {
+  text-align: initial;
+  margin-bottom: 2rem;
+}
+
+.about__description {
+  margin-bottom: 2rem;
 }
 
 .button {
-  --green: #1BFD9C;
-  font-size: 15px;
-  padding: 0.7em 2.7em;
-  letter-spacing: 0.06em;
-  position: relative;
-  font-family: inherit;
-  border-radius: 0.6em;
-  overflow: hidden;
-  transition: all 0.3s;
-  line-height: 1.4em;
-  border: 2px solid var(--green);
-  background: linear-gradient(to right, rgba(27, 253, 156, 0.1) 1%, transparent 40%,transparent 60% , rgba(27, 253, 156, 0.1) 100%);
-  color: var(--green);
-  box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.4), 0 0 9px 3px rgba(27, 253, 156, 0.1);
+  display: inline-block;
+  background-color: var(--first-color);
+  color: var(--white-color);
+  padding: 1rem 2rem;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  transition: .3s;
 }
 
 .button:hover {
-  color: #82ffc9;
-  box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.6), 0 0 9px 3px rgba(27, 253, 156, 0.2);
+  background-color: var(--first-color-alt);
 }
 
-.button:before {
-  content: "";
-  position: absolute;
-  left: -4em;
-  width: 4em;
-  height: 100%;
-  top: 0;
-  transition: transform .4s ease-in-out;
-  background: linear-gradient(to right, transparent 1%, rgba(27, 253, 156, 0.1) 40%,rgba(27, 253, 156, 0.1) 60% , transparent 100%);
+.about__content {
+  margin-top: 4rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
 }
 
-.button:hover:before {
-  transform: translateX(15em);
+.about__content h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--title-color);
 }
 
+.about__content h2 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--title-color);
+}
+
+.about__content p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+  .about__container {
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+  }
+
+  .about__card {
+    left: 0;
+    right: initial;
+  }
+
+  .about__title {
+    text-align: initial;
+  }
+
+  .about__description {
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .main {
+    padding: 4rem 2rem;
+  }
+
+  .about__container {
+    column-gap: 6rem;
+  }
+
+  .about__group {
+    padding-left: 1rem;
+  }
+
+  .about__img {
+    width: 380px;
+  }
+
+  .about__card {
+    width: 260px;
+    padding: 2rem 1.5rem;
+    bottom: -5rem;
+  }
+
+  .about__card-title {
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .about__card-description {
+    font-size: 0.875rem;
+  }
+
+  .about__title {
+    margin-bottom: 3rem;
+  }
+
+  .about__description {
+    margin-bottom: 3rem;
+  }
+}
 </style>

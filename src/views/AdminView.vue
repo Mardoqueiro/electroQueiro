@@ -1,90 +1,89 @@
 <template>
-    <!-- Loading Spinner -->
+  <main class="main">
     <div v-if="loading" class="loading-spinner">
       <Spinner />
     </div>
-    <main class="main">
-    <!-- USERS TABLE -->
-    <h2>Users Table</h2>
-    <addUser/>
-    <div class="container table-responsive">
-      <div class="col"></div>
-      <table class="table users-table" v-if="!loading && users">
-        <thead class="table-danger">
-          <tr>
-            <th>User ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Gender</th>
-            <th>User Role</th>
-            <th>Email Address</th>
-            <th>User Profile</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="user in users" :key="user.userID">
-            <td>{{ user.userID }}</td>
-            <td>{{ user.firstName }}</td>
-            <td>{{ user.lastName }}</td>
-            <td>{{ user.Gender }}</td>
-            <td>{{ user.userRole }}</td>
-            <td>{{ user.emailAdd }}</td>
-            <td>
-              <a :href="user.userProfile" target="_blank">
-                <img :src="user.userProfile" alt="User Profile" width="50">
-              </a>
-            </td>
-            <td>
-              <updateUser :user="user" />
-              <button class="btn btn-danger deleteButton" @click="deleteUser(user.userID)">Delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <div v-else class="admin-container">
+      <!-- USERS TABLE -->
+      <section class="table-section">
+        <h2>Users Table</h2>
+        <addUser/>
+        <div class="table-responsive">
+          <table class="table users-table">
+            <thead>
+              <tr>
+                <th>User ID</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Role</th>
+                <th>Email</th>
+                <th>Profile</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="user in users" :key="user.userID">
+                <td>{{ user.userID }}</td>
+                <td>{{ user.firstName }} {{ user.lastName }}</td>
+                <td>{{ user.Gender }}</td>
+                <td>{{ user.userRole }}</td>
+                <td>{{ user.emailAdd }}</td>
+                <td>
+                  <a :href="user.userProfile" target="_blank">
+                    <img :src="user.userProfile" alt="User Profile" width="50">
+                  </a>
+                </td>
+                <td>
+                  <updateUser :user="user" />
+                  <button class="btn btn-danger" @click="deleteUser(user.userID)">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-    <!-- PRODUCTS TABLE -->
-    <h2>Products Table</h2>
-    <addProduct/>
-    <div class="container table-responsive">
-      <table class="table products-table" v-if="!loading && products">
-        <thead class="table-danger">
-          <tr>
-            <th>Product ID</th>
-            <th>Car Name</th>
-            <th>Price</th>
-            <th>Car Brand</th>
-            <th>Car URL</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="product in products" :key="product.prodID">
-            <td>{{ product.prodID }}</td>
-            <td>{{ product.prodName }}</td>
-            <td>R {{ product.price }}</td>
-            <td> {{ product.prodBrand }}</td>
-            <td>
-              <a :href="product.imageURL" target="_blank">
-                <img :src="product.imageURL" alt="Product Image" width="50">
-              </a>
-            </td>
-            <td>
-              <updateProduct :product="product"/>
-              <button class="btn btn-danger deleteButton button" @click.prevent="deleteProduct(product.prodID)">Delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <!-- PRODUCTS TABLE -->
+      <section class="table-section">
+        <h2>Products Table</h2>
+        <addProduct/>
+        <div class="table-responsive">
+          <table class="table products-table">
+            <thead>
+              <tr>
+                <th>Product ID</th>
+                <th>Car Name</th>
+                <th>Price</th>
+                <th>Brand</th>
+                <th>Image</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="product in products" :key="product.prodID">
+                <td>{{ product.prodID }}</td>
+                <td>{{ product.prodName }}</td>
+                <td>R {{ product.price }}</td>
+                <td>{{ product.prodBrand }}</td>
+                <td>
+                  <a :href="product.imageURL" target="_blank">
+                    <img :src="product.imageURL" alt="Product Image" width="50">
+                  </a>
+                </td>
+                <td>
+                  <updateProduct :product="product"/>
+                  <button class="btn btn-danger" @click.prevent="deleteProduct(product.prodID)">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
     </div>
-  <div>
-  </div>
-</main>
+  </main>
 </template>
 
 <script>
-// import NavBar from '@/components/NavBar.vue'
 import updateUser from '@/components/UpdateUser.vue';
 import updateProduct from '@/components/UpdateProduct.vue';
 import addProduct from '@/components/AddProduct.vue';
@@ -93,7 +92,6 @@ import Spinner from '@/components/Spinner.vue';
 
 export default {
   components: {
-    // NavBar,
     updateUser,
     updateProduct,
     addProduct,
@@ -115,7 +113,7 @@ export default {
   },
   mounted() {
     this.loadData();
-    console.log('Users:', this.users); // Add this line
+    console.log('Users:', this.users);
   },
   methods: {
     async loadData() {
@@ -127,7 +125,7 @@ export default {
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
-        this.loading = false; // Hide spinner when data is loaded
+        this.loading = false;
       }
     },
     deleteUser(userID) {
@@ -164,47 +162,90 @@ export default {
 </script>
 
 <style scoped>
-main {
-  padding: 2rem 0;
+.main {
+  padding: 2rem 1rem;
   background-color: var(--container-color);
   color: var(--text-color);
 }
- 
-.button {
-  --green: #1BFD9C;
-  font-size: 15px;
-  padding: 0.7em 2.7em;
-  letter-spacing: 0.06em;
-  position: relative;
-  font-family: inherit;
-  border-radius: 0.6em;
-  overflow: hidden;
-  transition: all 0.3s;
-  line-height: 1.4em;
-  border: 2px solid var(--green);
-  background: linear-gradient(to right, rgba(27, 253, 156, 0.1) 1%, transparent 40%,transparent 60% , rgba(27, 253, 156, 0.1) 100%);
-  color: var(--green);
-  box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.4), 0 0 9px 3px rgba(27, 253, 156, 0.1);
+
+.admin-container {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.button:hover {
-  color: #82ffc9;
-  box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.6), 0 0 9px 3px rgba(27, 253, 156, 0.2);
+.table-section {
+  margin-bottom: 3rem;
 }
 
-.button:before {
-  content: "";
-  position: absolute;
-  left: -4em;
-  width: 4em;
-  height: 100%;
-  top: 0;
-  transition: transform .4s ease-in-out;
-  background: linear-gradient(to right, transparent 1%, rgba(27, 253, 156, 0.1) 40%,rgba(27, 253, 156, 0.1) 60% , transparent 100%);
+h2 {
+  color: var(--title-color);
+  margin-bottom: 1rem;
 }
 
-.button:hover:before {
-  transform: translateX(15em);
+.table-responsive {
+  overflow-x: auto;
 }
 
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.table th,
+.table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.table th {
+  background-color: var(--first-color);
+  color: var(--white-color);
+  font-weight: bold;
+  text-align: left;
+}
+
+.table tr:nth-child(even) {
+  background-color: var(--container-color-alt);
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-danger {
+  background-color: var(--first-color);
+  color: var(--white-color);
+}
+
+.btn-danger:hover {
+  background-color: var(--first-color-alt);
+}
+
+@media (max-width: 768px) {
+  .table th,
+  .table td {
+    padding: 0.5rem;
+  }
+
+  .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .table {
+    font-size: 0.875rem;
+  }
+
+  .btn {
+    padding: 0.25rem;
+    font-size: 0.75rem;
+  }
+}
 </style>

@@ -121,6 +121,14 @@ const formatPrice = (price) => {
     margin-bottom: 1rem;
 }
 
+@media (min-width: 576px) {
+    .item-actions {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
 @media (min-width: 768px) {
     .checkout-item {
         flex-direction: row;
@@ -128,10 +136,12 @@ const formatPrice = (price) => {
         align-items: center;
     }
 
+    .item-details {
+        flex: 1;
+    }
+
     .item-actions {
-        flex-direction: row;
-        align-items: center;
-        gap: 1rem;
+        width: 50%;
     }
 }
 

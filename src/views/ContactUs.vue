@@ -20,12 +20,12 @@
               <span>CONTACT</span>
               <span>US</span>
             </div>
-            <div class="app-contact">CONTACT INFO : +62 81 314 928 595</div>
+            <div class="app-contact">CONTACT INFO : +62 587 2540</div>
           </div>
           <div class="screen-body-item">
             <div class="app-form">
               <div class="app-form-group">
-                <input class="app-form-control" placeholder="NAME" value="Krisantus Wanandi">
+                <input class="app-form-control" placeholder="NAME" value="Mardoqueiro Dimbu">
               </div>
               <div class="app-form-group">
                 <input class="app-form-control" placeholder="EMAIL">
