@@ -112,7 +112,6 @@ main {
     color: var(--text-color);
 }
 
-/* From Uiverse.io by adamgiebl */ 
 .button {
   --green: #1BFD9C;
   font-size: 15px;
