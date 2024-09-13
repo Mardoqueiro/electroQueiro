@@ -1,170 +1,122 @@
 import { connection as db } from "../config/index.js";
-import { createToken } from "../middleware/AuthenticateUser.js";
-import { compare, hash } from "bcrypt";
 
-class Users {
-  fetchUsers(req, res) {
+class Products {
+  // Fetch all products
+  fetchProducts(req, res) {
     try {
-      const strQry = `SELECT userID, firstName, lastName, emailAdd, Gender, userRole, userPass, userProfile FROM Users;`;
-      db.query(strQry, (err, result) => {
-        if (err) throw new Error("Issue when retrieving all users.");
+      const strQry = `SELECT prodID, prodName, price, prodBrand, imageURL FROM Products;`;
+      db.query(strQry, (err, results) => {
+        if (err) throw new Error("Unable to fetch all products.");
         res.json({
           status: res.statusCode,
-          result,
+          results,
         });
       });
     } catch (e) {
-      res.json({
-        status: 404,
-        msg: e.message,
-      });
-    }
-  }
-  fetchUser(req, res) {
-    try {
-      const strQry = `SELECT userID, firstName, lastName, emailAdd, Gender, userRole, userPass, userProfile
-        FROM Users WHERE userID = ${req.params.id};`;
-
-      db.query(strQry, (err, result) => {
-        if (err)
-          throw new Error(`Unable to fetch user with id ${req.params.id}`);
-        res.json({
-          status: res.statusCode,
-          result,
-        });
-      });
-    } catch (e) {
-      res.json({
+      res.status(404).json({
         status: 404,
         msg: e.message,
       });
     }
   }
 
-  async registerUser(req, res) {
+  // Fetch recent products
+  recentProducts(req, res) {
     try {
-      let data = req.body;
-      data.userPass = await hash(data.userPass, 12);
-      // Payload
-      let user = {
-        emailAdd: data.emailAdd,
-        userPass: data.userPass,
-      };
-      let strQry = `
-    INSERT INTO Users
-    SET ?;
-    `;
-      db.query(strQry, [data], (err) => {
-        if (err) {
-          res.json({
-            status: res.statusCode,
-            msg: "This email has already been taken",
-          });
-        } else {
-          const token = createToken(user);
-          res.json({
-            token,
-            msg: "You are now registered.",
-          });
-        }
-      });
-    } catch (e) {
-      res.json({
-        status: 404,
-        err: e.message,
-      });
-    }
-  }
-
-  async updateUser(req, res) {
-    try {
-      let data = req.body;
-      if (data.userPass) {
-        data.userPass = await hash(data.userPass, 12);
-      }
       const strQry = `
-    UPDATE Users
-    SET ?
-    WHERE userID = ${req.params.id}
-    `;
-      db.query(strQry, [data], (err) => {
-        if (err) throw new Error("Unable to update a user");
+        SELECT prodID, prodName, price, prodBrand, imageURL
+        FROM Products
+        ORDER BY prodID DESC
+        LIMIT 5;
+      `;
+      db.query(strQry, (err, results) => {
+        if (err) throw new Error("Unable to retrieve recent products.");
         res.json({
           status: res.statusCode,
-          msg: "The user record was updated",
+          results,
         });
       });
     } catch (e) {
-      res.json({
+      res.status(404).json({
+        status: 404,
+        msg: e.message,
+      });
+    }
+  }
+
+  // Fetch a single product by ID
+  fetchProduct(req, res) {
+    try {
+      const strQry = `SELECT prodID, prodName, price, prodBrand, imageURL FROM Products WHERE prodID = ?;`;
+      db.query(strQry, [req.params.id], (err, result) => {
+        if (err) throw new Error(`Unable to fetch product with id ${req.params.id}`);
+        res.json({
+          status: res.statusCode,
+          result: result[0],
+        });
+      });
+    } catch (e) {
+      res.status(404).json({
+        status: 404,
+        msg: e.message,
+      });
+    }
+  }
+
+  // Add a new product
+  addProduct(req, res) {
+    try {
+      const strQry = `INSERT INTO Products SET ?;`;
+      db.query(strQry, [req.body], (err) => {
+        if (err) throw new Error("Unable to add a product.");
+        res.json({
+          status: res.statusCode,
+          msg: "Product was added successfully.",
+        });
+      });
+    } catch (e) {
+      res.status(400).json({
         status: 400,
         msg: e.message,
       });
     }
   }
 
-  async deleteUser(req, res) {
-    const userId = req.params.id;
+  // Update an existing product
+  updateProduct(req, res) {
     try {
-      // First, check if the user exists
-      const checkUserQuery = "SELECT * FROM Users WHERE userID = ?";
-      const [user] = await db.query(checkUserQuery, [userId]);
-      
-      if (user.length === 0) {
-        return res.status(404).json({
-          status: 404,
-          msg: "User not found",
-        });
+      const { prodName, price, prodBrand, imageURL } = req.body;
+      // Validation: Ensure required fields are provided
+      if (!prodName || !price || !prodBrand) {
+        return res.status(400).json({ msg: "Missing required fields" });
       }
-
-      // If user exists, proceed with deletion
-      const deleteQuery = "DELETE FROM Users WHERE userID = ?";
-      await db.query(deleteQuery, [userId]);
-
-      res.json({
-        status: res.statusCode,
-        msg: "User deleted successfully",
+      
+      const strQry = `UPDATE Products SET ? WHERE prodID = ?;`;
+      db.query(strQry, [req.body, req.params.id], (err) => {
+        if (err) throw new Error("Unable to update the product.");
+        res.json({
+          status: res.statusCode,
+          msg: "The product was updated successfully.",
+        });
       });
     } catch (e) {
-      res.json({
-        status: 404,
+      res.status(400).json({
+        status: 400,
         msg: e.message,
       });
     }
   }
 
-  async login(req, res) {
+  // Delete a product by ID
+  deleteProduct(req, res) {
     try {
-      const { emailAdd, userPass } = req.body;
-      const strQry = `SELECT userID, firstName, lastName, emailAdd, Gender, userRole, userPass, userProfile 
-                        FROM Users WHERE emailAdd = ?;`;
-      db.query(strQry, [emailAdd], async (err, result) => {
-        if (err) throw new Error("Unable to process login request.");
-        if (result.length === 0) {
-          return res.status(401).json({
-            status: 401,
-            msg: "Incorrect email or password.",
-          });
-        }
-
-        const user = result[0];
-        const isValidPass = await compare(userPass, user.userPass);
-        if (isValidPass) {
-          const token = createToken({
-            id: user.userID,
-            emailAdd: user.emailAdd,
-            userRole: user.userRole,
-          });
-          res.json({
-            status: res.statusCode,
-            token,
-            user,
-          });
-        } else {
-          res.status(401).json({
-            status: 401,
-            msg: "Incorrect email or password.",
-          });
-        }
+      const strQry = `DELETE FROM Products WHERE prodID = ?;`;
+      db.query(strQry, [req.params.id], (err) => {
+        if (err) throw new Error("Unable to delete the product.");
+        res.json({
+          status: res.statusCode,
+          msg: "Product deleted successfully.",
+        });
       });
     } catch (e) {
       res.status(404).json({
@@ -175,4 +127,4 @@ class Users {
   }
 }
 
-export { Users };
+export { Products };
