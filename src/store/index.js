@@ -66,19 +66,23 @@ export default createStore({
       } else {
         state.cart.push({ ...product, quantity: 1 });
         cookies.set('cart', JSON.stringify(state.cart));
-        
+        state.cartItemCount = this.getters.cartItemCount;  // Update count
       }
     },
     removeFromCart(state, productId) {
       const index = state.cart.findIndex(item => item.prodID === productId);
       if (index !== -1) {
         state.cart.splice(index, 1);
+        cookies.set('cart', JSON.stringify(state.cart));
+        state.cartItemCount = this.getters.cartItemCount;  // Update count
       }
     },
     updateCartItemQuantity(state, { productId, quantity }) {
       const item = state.cart.find(item => item.prodID === productId);
       if (item) {
         item.quantity = quantity;
+        cookies.set('cart', JSON.stringify(state.cart));
+        state.cartItemCount = this.getters.cartItemCount;  // Update count
       }
     },
     clearCart(state) {
