@@ -135,7 +135,7 @@
       </section>
 
     <!-- ========== POPULAR =========== -->
-    <section class="popular section" id="popular">
+    <!-- <section class="popular section" id="popular">
       <h2 class="section__title">
         Choose Your Electric Car <br />
         Of The Porsche Brand
@@ -173,7 +173,7 @@
             <button class="button popular__button">
               <i class="ri-shopping-bag-2-line"></i>
             </button>
-          </article>
+          </article> -->
 
           <!-- <div v-if="recentProducts && recentProducts.length > 0" class="row gap-2 justify-content-center">
             <Card v-for="product in recentProducts" :key="product.productID">
@@ -199,10 +199,10 @@
           <div v-else>
             <Spinner />
           </div> -->
-        </div>
+        <!-- </div>
         <div class="swiper-pagination"></div>
       </div>
-    </section>
+    </section> -->
 
     <!-- =========== OFFER ================ -->
     <section class="offer section">

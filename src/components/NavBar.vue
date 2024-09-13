@@ -30,12 +30,12 @@
           <li class="nav__item">
             <router-link to="/contact" class="nav__link" active-class="active-link"><span>Contact Us</span></router-link>
           </li>
-          <ul class="userAccount navbar-nav">
+          <!-- <ul class="userAccount navbar-nav">
             <li class="nav-item">
               <router-link class="nav-link" to="/profile" exact-active-class="active-link"
                 aria-current="page">Profile</router-link>
             </li>
-          </ul>
+          </ul> -->
           <li><button @click="logout">Logout</button></li>
           <li class="nav__item">
             <router-link to="/" class="nav__link" active-class="active-link"><span>Sign-Up/Login</span></router-link>
