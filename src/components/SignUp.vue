@@ -132,7 +132,8 @@ export default {
     },
     redirectToLogin() {
       this.showModal = false;
-      this.$router.push('/login');
+      // this.$router.push('/login');
+      this.$emit('login-success');
     },
   },
 };

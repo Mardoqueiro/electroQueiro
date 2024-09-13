@@ -17,7 +17,7 @@
                 <input type="text" class="form-control w-50 mx-auto" placeholder="Product Name" v-model="payload.prodName">
               </div>
               <div class="mb-3">
-                <input type="text" class="form-control w-50 mx-auto" placeholder="Product Price" v-model="payload.price">
+                <input type="text" class="form-control w-50 mx-auto" placeholder="Product Price" v-model="payload.Price">
               </div>
               <div class="mb-3">
                 <input type="text" class="form-control w-50 mx-auto" placeholder="Product Brand" v-model="payload.prodBrand">

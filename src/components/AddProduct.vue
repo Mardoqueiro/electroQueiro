@@ -43,7 +43,7 @@
                   type="number"
                   class="form-control w-50 mx-auto"
                   placeholder="Product Amount"
-                  v-model="payload.amount"
+                  v-model="payload.price"
                   required
                 />
               </div>
@@ -52,7 +52,7 @@
                   type="text"
                   class="form-control w-50 mx-auto"
                   placeholder="Product Category"
-                  v-model="payload.category"
+                  v-model="payload.prodBrand"
                   required
                 />
               </div>
@@ -61,7 +61,7 @@
                   type="text"
                   class="form-control w-50 mx-auto"
                   placeholder="Product URL"
-                  v-model="payload.prodURL"
+                  v-model="payload.imageURL"
                   required
                 />
               </div>
@@ -96,9 +96,9 @@
         payload: {
           prodID: null,
           prodName: "",
-          amount: null,
-          category: "",
-          prodURL: "",
+          price: null,
+          prodBrand: "",
+          imageURL: "",
         },
       };
     },
@@ -110,23 +110,11 @@
           console.error(error);
         }
       },
-      // async addingProduct() {
-      //   try {
-      //     const inputs = this.payload.prodName.length === 0 || this.payload.quantity === 0 || this.payload.amount === 0 || this.payload.category === 0 || this.payload.prodURL === 0 
-      //     if(inputs){
-      //       alert("Please fill all the fields");
-      //     } else {
-      //       await this.$store.dispatch("addProduct", this.payload);
-      //     }
-      //   } catch (error) {
-      //     console.error(error);
-      //   }
-      // },
     },
   };
   </script>
   <style scoped>
   .btn{
   text-decoration: underline;
-}
-</style>
+  }
+  </style>

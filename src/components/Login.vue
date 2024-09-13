@@ -3,6 +3,25 @@
     <h1>Login</h1>
     <form @submit.prevent="login">
       <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" v-model="emailAdd" required />
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" v-model="userPass" required />
+      </div>
+      <div class="button-group">
+        <button type="submit">Login</button>
+        <button class="btn" @click="$emit('close')">Close</button>
+      </div>
+    </form>
+    <p v-if="error" class="error">{{ error }}</p>
+  </div>
+
+  <!-- <div class="login-container">
+    <h1>Login</h1>
+    <form @submit.prevent="login">
+      <div class="form-group">
         <input type="email" id="email" v-model="emailAdd" required placeholder="Email Address" />
       </div>
       <div class="form-group">
@@ -14,7 +33,7 @@
       </div>
     </form>
     <p v-if="error" class="error">{{ error }}</p>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -28,12 +47,19 @@ export default {
     };
   },
   methods: {
-    login() {
+  //   login() {
+  //     this.$store.dispatch('login', {
+  //       emailAdd: this.emailAdd, userPass: this.userPass
+  //     }).catch(error => {
+  //       this.error = `Login failed: ${error.message}`;
+  //     });
+  //   }
+  // }
+
+  login() {
       this.$store.dispatch('login', {
-        emailAdd: this.emailAdd, userPass: this.userPass
-      }).catch(error => {
-        this.error = `Login failed: ${error.message}`;
-      });
+        emailAdd: this.emailAdd , userPass: this.userPass
+      })
     }
   }
 };
