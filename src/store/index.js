@@ -7,7 +7,9 @@ import { applyToken } from '@/service/AuthenticatedUser.js';
 import { useCookies } from 'vue3-cookies';
 const { cookies } = useCookies();
 const apiURL = 'https://electroqueiro.onrender.com/';
+console.log(cookies.get('LegitUser')?.token);
 
+applyToken(cookies.get('LegitUser')?.token)
 export default createStore({
   state: {
     users: null,
@@ -33,6 +35,7 @@ export default createStore({
   mutations: {
     setUsers(state, value) {
       state.users = value;
+      state.isAuthenticated = true;
     },
     setUser(state, value) {
       state.user = value;
@@ -48,7 +51,6 @@ export default createStore({
     },
     setToken(state, token) {
       state.token = token;
-      state.isAuthenticated = true;
       localStorage.setItem('token', token);
     },
     clearToken(state) {
@@ -86,8 +88,26 @@ export default createStore({
       state.cartItems = [];
       state.cartCount = 0;  // Reset cartCount
     },
+
+    setUserRole(state, value) {
+      state.userRole = value;
+    }
   },
   actions: {
+    initialize({ commit }) {
+      const token = localStorage.getItem('token');
+      const user = cookies.get('LegitUser')?.user;
+
+      if (token) {
+        commit('setToken', token);
+        commit('setAuthenticated', true);
+        if (user) {
+          commit('setUser', user);
+          commit('setUserRole', user.userRole);
+        }
+      }
+    },
+
     // Users
     async fetchUsers({ commit }) {
       try {
@@ -183,43 +203,75 @@ export default createStore({
       }
     },
 
-    async login({ commit }, payload) {
-      try {
-        const { data } = await axios.post(`${apiURL}users/login`, payload);
-        const { msg, result, token } = data;
-        if (token) {
-          toast.success(`${msg}😎`, {
-            autoClose: 2000,
-            position: toast.POSITION.BOTTOM_CENTER,
-          });
-          commit('setUser', result);
-          commit('setToken', token);
-          cookies.set('LegitUser', { token, msg, result });
-          applyToken(token);
-          router.push({ name: 'products' });
-        } else {
-          toast.error(msg, {
-            autoClose: 2000,
-            position: toast.POSITION.BOTTOM_CENTER,
-          });
-        }
-      } catch (error) {
-        console.error('Login error:', error);
-        toast.error(error.message, {
-          autoClose: 2000,
-          position: toast.POSITION.BOTTOM_CENTER,
-        });
-      }
-    },
+     // ===== LOGIN =======
+async login({ commit }, payload) {
+  try {
+    const { err, user, token } = await (await axios.post(`${apiURL}users/login`, payload)).data;
+    if (user) {
+      commit('setUser', user);
+      commit('setToken', token);
+      commit('setUserRole', user.userRole);
+      commit('setAuthenticated', true); 
+      applyToken(token);
+     
+      // Store token and user in cookies
+      cookies.set('LegitUser', { token, user });
+      applyToken(token); 
 
-    logout({ commit }) {
-      commit('clearToken');
-      commit('setUser', null);
-      cookies.remove('LegitUser');
-      router.push({ name: 'auth-options' });
-    },
+      // Redirect based on user role
+      router.push(user.userRole === 'Admin' ? { name: 'admin' } : { name: 'home' });
+    } else {
+      toast.error(`${err}`, { autoClose: 2000, position: toast.POSITION.BOTTOM_CENTER });
+    }
+  } catch (e) {
+    toast.error('Login failed. Please try again.', { autoClose: 2000, position: toast.POSITION.BOTTOM_CENTER });
+  }
+},
 
-    // Products
+  logout({ commit }) {
+    commit('logout');
+    cookies.remove('LegitUser');
+    applyToken(null);
+    router.push('/');
+  },
+
+    // async login({ commit }, payload) {
+    //   try {
+    //     const { data } = await axios.post(`${apiURL}users/login`, payload);
+    //     const { msg, result, token } = data;
+    //     if (token) {
+    //       toast.success(`${msg}😎`, {
+    //         autoClose: 2000,
+    //         position: toast.POSITION.BOTTOM_CENTER,
+    //       });
+    //       commit('setUser', result);
+    //       commit('setToken', token);
+    //       cookies.set('LegitUser', { token, msg, result });
+    //       applyToken(token);
+    //       router.push({ name: 'products' });
+    //     } else {
+    //       toast.error(msg, {
+    //         autoClose: 2000,
+    //         position: toast.POSITION.BOTTOM_CENTER,
+    //       });
+    //     }
+    //   } catch (error) {
+    //     console.error('Login error:', error);
+    //     toast.error(error.message, {
+    //       autoClose: 2000,
+    //       position: toast.POSITION.BOTTOM_CENTER,
+    //     });
+    //   }
+    // },
+
+    // logout({ commit }) {
+    //   commit('clearToken');
+    //   commit('setUser', null);
+    //   cookies.remove('LegitUser');
+    //   router.push({ name: 'auth-options' });
+    // },
+
+    // ======= Products =======
     async fetchProducts({ commit }) {
       try {
         const { data } = await axios.get(`${apiURL}product`);
