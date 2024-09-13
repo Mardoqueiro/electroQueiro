@@ -32,7 +32,7 @@ app.use(
     })
 )
 
-app.get('^/$|/electroQueiro', (req, res) => {
+app.get('^/$|/eshop', (req, res) => {
     res.status(200).sendFile(path.resolve('./static/html/index.html'))
 })
 
