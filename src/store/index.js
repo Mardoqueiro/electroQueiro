@@ -14,7 +14,7 @@ export default createStore({
   state: {
     users: null,
     user: null,
-    products: null,
+    products: [],
     recentProducts: null,
     product: null,
     userRole: null,
@@ -30,12 +30,12 @@ export default createStore({
     cartItemCount: (state) => {
       return state.cart.reduce((count, item) => count + item.quantity, 0)
     },
-    getUsers: state => state.users
+    getUsers: state => state.users,
+    products: state => state.products
   },
   mutations: {
     setUsers(state, value) {
       state.users = value;
-      state.isAuthenticated = true;
     },
     setUser(state, value) {
       state.user = value;
@@ -55,7 +55,6 @@ export default createStore({
     },
     clearToken(state) {
       state.token = '';
-      state.isAuthenticated = false;
       localStorage.removeItem('token');
     },
     addToCart(state, product) {
@@ -85,8 +84,8 @@ export default createStore({
       }
     },
     clearCart(state) {
-      state.cartItems = [];
-      state.cartCount = 0;  // Reset cartCount
+      state.cart = [];
+      state.cartItemCount = 0;  // Reset cartCount
     },
 
     setUserRole(state, value) {
@@ -100,7 +99,6 @@ export default createStore({
 
       if (token) {
         commit('setToken', token);
-        commit('setAuthenticated', true);
         if (user) {
           commit('setUser', user);
           commit('setUserRole', user.userRole);
@@ -108,15 +106,21 @@ export default createStore({
       }
     },
 
-    // Users
-    async fetchUsers({ commit }) {
+    async fetchProducts({ commit }) {
       try {
-        const response = await fetch(`${apiURL}users`)
-        const users = await response.json()
-        console.log('Fetched users:', users) // Log fetched users
-        commit('setUsers', users)
+        const { data } = await axios.get(`${apiURL}product`);
+        const { results } = data;
+        if (results) {
+          commit('setProducts', results);
+        } else {
+          router.push({ name: 'login' });
+        }
       } catch (error) {
-        console.error('Error fetching users:', error)
+        console.error('Fetch products error:', error);
+        toast.error(error.message, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
       }
     },
 
@@ -203,91 +207,30 @@ export default createStore({
       }
     },
 
-     // ===== LOGIN =======
-async login({ commit }, payload) {
-  try {
-    const { err, user, token } = await (await axios.post(`${apiURL}users/login`, payload)).data;
-    if (user) {
-      commit('setUser', user);
-      commit('setToken', token);
-      commit('setUserRole', user.userRole);
-      commit('setAuthenticated', true); 
-      applyToken(token);
-     
-      // Store token and user in cookies
-      cookies.set('LegitUser', { token, user });
-      applyToken(token); 
-
-      // Redirect based on user role
-      router.push(user.userRole === 'Admin' ? { name: 'admin' } : { name: 'home' });
-    } else {
-      toast.error(`${err}`, { autoClose: 2000, position: toast.POSITION.BOTTOM_CENTER });
-    }
-  } catch (e) {
-    toast.error('Login failed. Please try again.', { autoClose: 2000, position: toast.POSITION.BOTTOM_CENTER });
-  }
-},
-
-  logout({ commit }) {
-    commit('logout');
-    cookies.remove('LegitUser');
-    applyToken(null);
-    router.push('/');
-  },
-
-    // async login({ commit }, payload) {
-    //   try {
-    //     const { data } = await axios.post(`${apiURL}users/login`, payload);
-    //     const { msg, result, token } = data;
-    //     if (token) {
-    //       toast.success(`${msg}😎`, {
-    //         autoClose: 2000,
-    //         position: toast.POSITION.BOTTOM_CENTER,
-    //       });
-    //       commit('setUser', result);
-    //       commit('setToken', token);
-    //       cookies.set('LegitUser', { token, msg, result });
-    //       applyToken(token);
-    //       router.push({ name: 'products' });
-    //     } else {
-    //       toast.error(msg, {
-    //         autoClose: 2000,
-    //         position: toast.POSITION.BOTTOM_CENTER,
-    //       });
-    //     }
-    //   } catch (error) {
-    //     console.error('Login error:', error);
-    //     toast.error(error.message, {
-    //       autoClose: 2000,
-    //       position: toast.POSITION.BOTTOM_CENTER,
-    //     });
-    //   }
-    // },
-
-    // logout({ commit }) {
-    //   commit('clearToken');
-    //   commit('setUser', null);
-    //   cookies.remove('LegitUser');
-    //   router.push({ name: 'auth-options' });
-    // },
-
-    // ======= Products =======
-    async fetchProducts({ commit }) {
+    async login({ commit }, payload) {
       try {
-        const { data } = await axios.get(`${apiURL}product`);
-        const { results } = data;
-        if (results) {
-          commit('setProducts', results);
+        const { err, user, token } = await (await axios.post(`${apiURL}users/login`, payload)).data;
+        if (user) {
+          commit('setUser', user);
+          commit('setToken', token);
+          commit('setUserRole', user.userRole);
+          applyToken(token);
+          cookies.set('LegitUser', { token, user });
+          router.push(user.userRole === 'Admin' ? { name: 'admin' } : { name: 'home' });
         } else {
-          router.push({ name: 'login' });
+          toast.error(`${err}`, { autoClose: 2000, position: toast.POSITION.BOTTOM_CENTER });
         }
-      } catch (error) {
-        console.error('Fetch products error:', error);
-        toast.error(error.message, {
-          autoClose: 2000,
-          position: toast.POSITION.BOTTOM_CENTER,
-        });
+      } catch (e) {
+        toast.error('Login failed. Please try again.', { autoClose: 2000, position: toast.POSITION.BOTTOM_CENTER });
       }
+    },
+
+    logout({ commit }) {
+      commit('clearToken');
+      commit('setUser', null);
+      cookies.remove('LegitUser');
+      applyToken(null);
+      router.push('/');
     },
 
     async recentProducts({ commit }) {

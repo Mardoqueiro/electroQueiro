@@ -11,7 +11,7 @@
         <h2>Users</h2>
         <addUser class="mb-4"/>
         <div class="table-responsive">
-          <table class="table users-table">
+          <table class="table users-table" v-if="!loading && users">
             <thead>
               <tr>
                 <th>User ID</th>
@@ -115,7 +115,7 @@ export default {
   },
   mounted() {
     this.loadData();
-    console.log('Users:', this.users);
+    // console.log('Users:', this.users); comeback if not work
   },
   methods: {
     async loadData() {
@@ -130,26 +130,33 @@ export default {
         this.loading = false;
       }
     },
-    async deleteUser(userID) {
-      if (confirm('Are you sure you want to delete this user?')) {
-        try {
-          await this.$store.dispatch('deleteUser', userID);
-          // Optionally refresh the users list
-          await this.$store.dispatch('fetchUsers');
-        } catch (error) {
-          console.error('Error deleting user:', error);
-        }
-      }
-    },
-    editUser(user) {
+
+
+    // async deleteUser(userID) {
+    //   if (confirm('Are you sure you want to delete this user?')) {
+    //     try {
+    //       await this.$store.dispatch('deleteUser', userID);
+    //       // Optionally refresh the users list
+    //       await this.$store.dispatch('fetchUsers');
+    //     } catch (error) {
+    //       console.error('Error deleting user:', error);
+    //     }
+    //   }
+    // },
+    // editUser(user) {
       // You can implement this method to open a modal or navigate to an edit page
-      console.log('Editing user:', user);
+      // console.log('Editing user:', user);
       // For example, you could use a modal component:
       // this.$refs.updateUserModal.openModal(user);
-    },
+    // },
     // deleteUser(user) {
     //   this.$store.dispatch('deleteUser', user.userID);
     // },
+//     
+
+deleteUser(userID) {
+      this.$store.dispatch('deleteUser', userID);
+    },
     deleteProduct(prodID) {
       this.$store.dispatch('deleteProduct', prodID);
     },

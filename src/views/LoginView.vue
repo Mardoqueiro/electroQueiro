@@ -31,6 +31,11 @@ export default {
         showForm: null, 
     };
   },
+  methods: {
+    handleLoginSuccess() {
+      this.showForm = 'login';  // Display login form
+    },
+  },
 };
 </script>
 

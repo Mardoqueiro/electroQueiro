@@ -58,6 +58,18 @@
 
 <script>
 export default {
+  data() {
+    return {
+      userRole: localStorage.getItem('userRole')
+    }
+  },
+  methods: {
+    logout() {
+      localStorage.removeItem('token');
+      this.$router.push('/');
+    }
+  },
+
   name: 'NavBar',
   mounted() {
     const navMenu = document.getElementById('nav-menu');
