@@ -22,6 +22,21 @@
             </div>
             <div class="app-contact">CONTACT INFO : +62 587 2540</div>
           </div>
+          <form
+  action="https://formspree.io/f/manwzegw"
+  method="POST"
+>
+  <label>
+    Your email:
+    <input type="email" name="email">
+  </label>
+  <label>
+    Your message:
+    <textarea name="message"></textarea>
+  </label>
+  <!-- your other form fields go here -->
+  <button type="submit">Send</button>
+</form>
           <div class="screen-body-item">
             <div class="app-form">
               <div class="app-form-group">

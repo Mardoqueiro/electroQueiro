@@ -15,8 +15,11 @@ export default createStore({
     products: null,
     recentProducts: null,
     product: null,
+    userRole: null,
+    isAuthenticated: false,
     token: localStorage.getItem('token') || '',
-    cart: JSON.parse(cookies.get('cart')) || []
+    cart: JSON.parse(cookies.get('cart')) || [],
+    cartItemCount: 0
   },
   getters: {
     isAuthenticated: state => !!state.token,
@@ -31,7 +34,11 @@ export default createStore({
   mutations: {
     setUsers(state, value) {
       state.users = value;
+      state.isAuthenticated = true;
     },
+    // setUsers(state, value) {
+    //   state.users = value;
+    // },
     setUser(state, value) {
       state.user = value;
     },
@@ -73,7 +80,11 @@ export default createStore({
       if (item) {
         item.quantity = quantity;
       }
-    }
+    },
+    clearCart(state) {
+      state.cartItems = [];
+      state.cartCount = 0;  // Reset cartCount
+    },
   },
   actions: {
     // Users

@@ -68,11 +68,10 @@ export default {
     <h1>Sign Up</h1>
     <form @submit.prevent="register">
       <div class="form-group">
-        <!-- Form Fields -->
         <div class="mb-3">
           <input
             type="text"
-            class="form-control mx-auto"
+            class="form-control"
             placeholder="First Name"
             v-model="payload.firstName"
             required
@@ -81,7 +80,7 @@ export default {
         <div class="mb-3">
           <input
             type="text"
-            class="form-control mx-auto"
+            class="form-control"
             placeholder="Last Name"
             v-model="payload.lastName"
             required
@@ -90,7 +89,7 @@ export default {
         <div class="mb-3">
           <input
             type="text"
-            class="form-control mx-auto"
+            class="form-control"
             placeholder="Gender"
             v-model="payload.Gender"
             required
@@ -99,7 +98,7 @@ export default {
         <div class="mb-3">
           <input
             type="text"
-            class="form-control mx-auto"
+            class="form-control"
             placeholder="Role e.g. user"
             v-model="payload.userRole"
           />
@@ -107,7 +106,7 @@ export default {
         <div class="mb-3">
           <input
             type="email"
-            class="form-control mx-auto"
+            class="form-control"
             placeholder="Email Address"
             v-model="payload.emailAdd"
             required
@@ -116,7 +115,7 @@ export default {
         <div class="mb-3">
           <input
             type="password"
-            class="form-control mx-auto"
+            class="form-control"
             placeholder="Password"
             v-model="payload.userPass"
             required
@@ -125,7 +124,7 @@ export default {
         <div class="mb-3">
           <input
             type="text"
-            class="form-control mx-auto"
+            class="form-control"
             placeholder="Profile Picture URL"
             v-model="payload.userProfile"
             required
@@ -138,12 +137,10 @@ export default {
       </div>
     </form>
 
-    <!-- Loading Spinner -->
     <div v-if="loading" class="loading-spinner">
       <Spinner />
     </div>
 
-    <!-- Success Modal -->
     <div v-if="showModal" class="modal fade show d-block" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -154,8 +151,8 @@ export default {
             <p>You have successfully signed up! Click the button below to log in.</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn" @click="showModal = false">Close</button>
-            <button type="button" class="btn" @click="redirectToLogin">Login</button>
+            <button type="button" class="btn btn-secondary" @click="showModal = false">Close</button>
+            <button type="button" class="btn btn-primary" @click="redirectToLogin">Login</button>
           </div>
         </div>
       </div>
@@ -164,12 +161,12 @@ export default {
 </template>
 
 <script>
-import Spinner from '@/components/Spinner.vue'; // Import the spinner component
+import Spinner from '@/components/Spinner.vue';
 
 export default {
   name: 'SignUp',
   components: {
-    Spinner // Register the spinner component
+    Spinner
   },
   data() {
     return {
@@ -183,24 +180,24 @@ export default {
         userProfile: "",
       },
       showModal: false,
-      loading: false, // Track loading state
+      loading: false,
     };
   },
   methods: {
     async register() {
-      this.loading = true; // Show spinner
+      this.loading = true;
       try {
         await this.$store.dispatch('register', this.payload);
-        this.showModal = true; // Show modal on success
+        this.showModal = true;
       } catch (error) {
         console.error(error);
       } finally {
-        this.loading = false; // Hide spinner
+        this.loading = false;
       }
     },
     redirectToLogin() {
       this.showModal = false;
-      this.$router.push('/login'); // Redirect to login
+      this.$router.push('/login');
     },
   },
 };
@@ -208,99 +205,106 @@ export default {
 
 <style scoped>
 .signup-container {
-  width: 25rem;
+  width: 100%;
+  max-width: 400px;
   margin: 0 auto;
-  margin-bottom: 1rem;
-  padding: 20px;
-  border: 1px solid #ccc;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.9);
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
   text-align: center;
-  color: black;
-  font-size: 3rem;
-  backdrop-filter: blur(5px);
+  color: #333;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .form-control {
-  width: 80%;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
 .form-footer {
   display: flex;
   justify-content: space-between;
+  margin-top: 1rem;
 }
 
-button {
-  min-width: 120px;
-  position: relative;
+.btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
   cursor: pointer;
-  padding: 12px 17px;
-  border: 0;
-  border-radius: 7px;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-  background: radial-gradient(
-    ellipse at bottom,
-    rgba(71, 81, 92, 1) 0%,
-    rgba(11, 21, 30, 1) 45%
-  );
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-primary {
+  background-color: #007bff;
   color: white;
-  transition: all 1s cubic-bezier(0.15, 0.83, 0.66, 1);
+  border: none;
 }
 
-button::before {
-  content: "";
-  width: 70%;
-  height: 1px;
-  position: absolute;
-  bottom: 0;
-  left: 15%;
-  background: rgb(255, 255, 255);
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 1) 50%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  opacity: 0.2;
-  transition: all 1s cubic-bezier(0.15, 0.83, 0.66, 1);
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+  border: none;
 }
 
-button:hover {
-  color: rgb(255, 255, 255, 1);
-  transform: scale(1.1) translateY(-3px);
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-button:hover::before {
-  opacity: 1;
+.modal-content {
+  background-color: #f8f9fa;
+  border-radius: 8px;
 }
 
-/* Center Modal */
-.modal.show.d-block {
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
+.modal-header {
+  border-bottom: none;
+  padding: 1.5rem 1.5rem 0.5rem;
 }
 
-.modal-dialog {
-  max-width: 500px;
-  margin: 0;
+.modal-footer {
+  border-top: none;
+  padding: 0.5rem 1.5rem 1.5rem;
 }
 
-/* Center and overlay the spinner */
+.modal-title {
+  color: #333;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
 .loading-spinner {
-  position: fixed; /* Fixed positioning to overlay the content */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5); /* Darkened background */
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1050; /* Higher z-index to be on top of other content */
+  z-index: 1050;
 }
 </style>
