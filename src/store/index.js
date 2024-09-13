@@ -16,13 +16,12 @@ export default createStore({
     recentProducts: null,
     product: null,
     userRole: null,
-    isAuthenticated: false,
+    isAuthenticated: !!localStorage.getItem('token'),
     token: localStorage.getItem('token') || '',
     cart: JSON.parse(cookies.get('cart')) || [],
     cartItemCount: 0
   },
   getters: {
-    isAuthenticated: state => !!state.token,
     cartTotal: (state) => {
       return state.cart.reduce((total, item) => total + item.price * item.quantity, 0)
     },
@@ -34,11 +33,7 @@ export default createStore({
   mutations: {
     setUsers(state, value) {
       state.users = value;
-      state.isAuthenticated = true;
     },
-    // setUsers(state, value) {
-    //   state.users = value;
-    // },
     setUser(state, value) {
       state.user = value;
     },
@@ -53,10 +48,12 @@ export default createStore({
     },
     setToken(state, token) {
       state.token = token;
+      state.isAuthenticated = true;
       localStorage.setItem('token', token);
     },
     clearToken(state) {
       state.token = '';
+      state.isAuthenticated = false;
       localStorage.removeItem('token');
     },
     addToCart(state, product) {
@@ -179,7 +176,7 @@ export default createStore({
         }
       } catch (error) {
         console.error('Delete user error:', error);
-        toast.error('Unable to delete a user', {
+        toast.error(`Unable to delete user: ${error.response?.data?.message || error.message}`, {
           autoClose: 2000,
           position: toast.POSITION.BOTTOM_CENTER
         });
@@ -190,7 +187,7 @@ export default createStore({
       try {
         const { data } = await axios.post(`${apiURL}users/login`, payload);
         const { msg, result, token } = data;
-        if (result) {
+        if (token) {
           toast.success(`${msg}😎`, {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER,

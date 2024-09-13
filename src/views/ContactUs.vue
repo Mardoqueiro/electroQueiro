@@ -21,41 +21,32 @@
               <span>US</span>
             </div>
             <div class="app-contact">CONTACT INFO : +62 587 2540</div>
+            <div class="social-icons">
+              <a href="#" class="social-icon"><i class="ri-facebook-fill"></i></a>
+              <a href="#" class="social-icon"><i class="ri-twitter-x-fill"></i></a>
+              <a href="#" class="social-icon"><i class="ri-instagram-fill"></i></a>
+              <a href="#" class="social-icon"><i class="ri-linkedin-fill"></i></a>
+            </div>
           </div>
-          <form
-  action="https://formspree.io/f/manwzegw"
-  method="POST"
->
-  <label>
-    Your email:
-    <input type="email" name="email">
-  </label>
-  <label>
-    Your message:
-    <textarea name="message"></textarea>
-  </label>
-  <!-- your other form fields go here -->
-  <button type="submit">Send</button>
-</form>
           <div class="screen-body-item">
-            <div class="app-form">
+            <form class="app-form" action="https://formspree.io/f/manwzegw" method="POST">
               <div class="app-form-group">
-                <input class="app-form-control" placeholder="NAME" value="Mardoqueiro Dimbu">
+                <input class="app-form-control" type="text" name="name" placeholder="NAME" required>
               </div>
               <div class="app-form-group">
-                <input class="app-form-control" placeholder="EMAIL">
+                <input class="app-form-control" type="email" name="email" placeholder="EMAIL" required>
               </div>
               <div class="app-form-group">
-                <input class="app-form-control" placeholder="CONTACT NO">
+                <input class="app-form-control" type="tel" name="contact" placeholder="CONTACT NO">
               </div>
               <div class="app-form-group message">
-                <input class="app-form-control" placeholder="MESSAGE">
+                <textarea class="app-form-control" name="message" placeholder="MESSAGE" required></textarea>
               </div>
               <div class="app-form-group buttons">
-                <button class="app-form-button">CANCEL</button>
-                <button class="app-form-button">SEND</button>
+                <button type="button" class="app-form-button cancel" @click="resetForm">CANCEL</button>
+                <button type="submit" class="app-form-button">SEND</button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
@@ -73,7 +64,7 @@ export default {
 .background {
   display: flex;
   min-height: 100vh;
-  background-color: var(--body-color);
+  background-color: var(--container-color);
   color: var(--text-color);
 }
 
@@ -208,16 +199,48 @@ export default {
 }
 
 .app-form-button {
-  background: none;
+  background-color: var(--first-color);
   border: none;
-  color: var(--first-color);
+  color: #fff;
   font-size: 14px;
+  padding: 10px 20px;
+  border-radius: 5px;
   cursor: pointer;
   outline: none;
-  transition: color 0.3s;
+  transition: background-color 0.3s, transform 0.1s;
+  margin-left: 10px;
 }
 
 .app-form-button:hover {
+  background-color: var(--first-color-alt);
+}
+
+.app-form-button:active {
+  transform: scale(0.98);
+}
+
+.app-form-button.cancel {
+  background-color: #ccc;
+  color: #333;
+}
+
+.app-form-button.cancel:hover {
+  background-color: #bbb;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.social-icon {
+  color: var(--first-color);
+  font-size: 24px;
+  transition: color 0.3s;
+}
+
+.social-icon:hover {
   color: var(--first-color-alt);
 }
 

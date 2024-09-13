@@ -10,25 +10,25 @@
       <div class="nav__menu" id="nav-menu">
         <ul class="nav__list">
           <li class="nav__item">
-            <router-link to="/home" class="nav__link active-link"><span>Home</span></router-link>
+            <router-link to="/home" class="nav__link " active-class="active-link"><span>Home</span></router-link>
           </li>
           <li class="nav__item">
-            <router-link to="/about" class="nav__link"><span>About</span></router-link>
+            <router-link to="/about" class="nav__link" active-class="active-link" ><span>About</span></router-link>
           </li>
           <li class="nav__item">
-            <router-link to="/products" class="nav__link"><span>Cars</span></router-link>
+            <router-link to="/products" class="nav__link" active-class="active-link"><span>Cars</span></router-link>
           </li>
           <li class="nav__item">
-            <router-link to="/checkout" class="nav__link"><span>Cart</span>
+            <router-link to="/checkout" class="nav__link" active-class="active-link"><span>Cart</span>
               <span class="badge bg-warning rounded-pill" counter>0</span>
             </router-link>
           </li>
           <!-- v-show="userRole === 'Admin'" -->
           <li  class="nav-item">
-            <router-link to="/admin" class="nav__link"><span>Admin</span></router-link>
+            <router-link to="/admin" class="nav__link" active-class="active-link"><span>Admin</span></router-link>
           </li>
           <li class="nav__item">
-            <router-link to="/contact" class="nav__link"><span>Contact Us</span></router-link>
+            <router-link to="/contact" class="nav__link" active-class="active-link"><span>Contact Us</span></router-link>
           </li>
           <ul class="userAccount navbar-nav">
             <li class="nav-item">
@@ -38,7 +38,7 @@
           </ul>
           <li><button @click="logout">Logout</button></li>
           <li class="nav__item">
-            <router-link to="/" class="nav__link"><span>Sign-Up/Login</span></router-link>
+            <router-link to="/" class="nav__link" active-class="active-link"><span>Sign-Up/Login</span></router-link>
           </li>
           
         </ul>
