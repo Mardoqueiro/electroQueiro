@@ -6,7 +6,6 @@ const orderRouter = express.Router()
 
 orderRouter.use(bodyParser.json())
 
-
 orderRouter.get('/:userID', (req, res) => {
     cart.fetchCart(req.params.userID, res);
 });
@@ -21,23 +20,21 @@ orderRouter.delete('/deleteFromCart', (req, res) => {
     cart.deleteFromCart(prodID, userID, res);
 });
 
+orderRouter.get('/', (req, res) => {
+    cart. fetchCart(req, res)
+})
 
-// orderRouter.get('/', (req, res) => {
-//     cart. fetchCart(req, res)
-// })
+orderRouter.get('/:id', (req, res) => {
+    cart.itemsInCart(req, res)
+})
 
+orderRouter.post('/add', (req, res) => {
+    cart.addToCart(req, res)
+})
 
-// orderRouter.get('/:id', (req, res) => {
-//     cart.itemsInCart(req, res)
-// })
-
-// orderRouter.post('/add', (req, res) => {
-//     cart.addToCart(req, res)
-// })
-
-// orderRouter.delete('/:id', (req, res) => {
-//     cart.deleteFromCart(req, res)
-// })
+orderRouter.delete('/:id', (req, res) => {
+    cart.deleteFromCart(req, res)
+})
 
 
 export{ orderRouter }
