@@ -102,19 +102,27 @@ class Users {
     }
   }
 
-  deleteUser(req, res) {
+  async deleteUser(req, res) {
+    const userId = req.params.id;
     try {
-      const strQry = `
-        DELETE FROM Users
-        WHERE userID = ${req.params.id};
-        `;
-      db.query(strQry, (err) => {
-        if (err)
-          throw new Error("To delete a user, please review your delete query.");
-        res.json({
-          status: res.statusCode,
-          msg: "User deleted successfully",
+      // First, check if the user exists
+      const checkUserQuery = "SELECT * FROM Users WHERE userID = ?";
+      const [user] = await db.query(checkUserQuery, [userId]);
+      
+      if (user.length === 0) {
+        return res.status(404).json({
+          status: 404,
+          msg: "User not found",
         });
+      }
+
+      // If user exists, proceed with deletion
+      const deleteQuery = "DELETE FROM Users WHERE userID = ?";
+      await db.query(deleteQuery, [userId]);
+
+      res.json({
+        status: res.statusCode,
+        msg: "User deleted successfully",
       });
     } catch (e) {
       res.json({
